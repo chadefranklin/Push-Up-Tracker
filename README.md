@@ -81,9 +81,9 @@ Optional:
    | Property      | Type     | Description |
    | ------------- | -------- | ------------|
    | objectId      | String   | unique id for the user post (default field) |
-   | author        | Pointer to User| image author |
+   | author        | Pointer to User| post author |
    | video         | File     | video that user posts |
-   | caption       | String   | image caption by author |
+   | caption       | String   | post caption by author |
    | commentsCount | Number   | number of comments on a post |
    | likesCount    | Number   | number of likes for the post |
    | createdAt     | DateTime | date when post is created (default field) |
