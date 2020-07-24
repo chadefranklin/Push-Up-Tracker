@@ -10,7 +10,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface GroupsViewController : UIViewController
+@interface GroupsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @end
 

@@ -7,8 +7,16 @@
 //
 
 #import "GroupsViewController.h"
+#import <Parse/Parse.h>
+#import "Group.h"
+#import "GroupCell.h"
 
 @interface GroupsViewController ()
+
+@property (weak, nonatomic) IBOutlet UITableView *groupsTableView;
+
+@property (nonatomic, strong) NSArray *groups;
+@property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 @end
 
@@ -17,6 +25,54 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.groupsTableView.dataSource = self;
+    self.groupsTableView.delegate = self;
+    
+    [self fetchGroups];
+    
+    self.refreshControl = [[UIRefreshControl alloc] init];
+    [self.refreshControl addTarget:self action:@selector(fetchGroups) forControlEvents:UIControlEventValueChanged];
+    //[self.moviesTableView addSubview:self.refreshControl];
+    [self.groupsTableView insertSubview:self.refreshControl atIndex:0];
+}
+
+- (void)fetchGroups{
+    // construct PFQuery
+    PFQuery *groupQuery = [Group query];
+    [groupQuery orderByDescending:@"createdAt"];
+    //NSArray<NSString *> *keys = @[@"name", @"groupImage"];
+    NSArray<NSString *> *keys = @[@"name"];
+    [groupQuery selectKeys:keys];
+    [groupQuery whereKey:@"members" equalTo:[PFUser currentUser]];
+
+    // fetch data asynchronously
+    [groupQuery findObjectsInBackgroundWithBlock:^(NSArray<Group *> * _Nullable groups, NSError * _Nullable error) {
+        if (groups) {
+            // do something with the data fetched
+            self.groups = groups;
+            [self.groupsTableView reloadData];
+        }
+        else {
+            // handle error
+        }
+        
+        [self.refreshControl endRefreshing];
+    }];
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.groups.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    GroupCell *cell = [tableView dequeueReusableCellWithIdentifier:@"GroupCell"];
+    
+    PFObject *group = self.groups[indexPath.row];
+    
+    [cell setGroup:group];
+        
+    return cell;
 }
 
 /*
