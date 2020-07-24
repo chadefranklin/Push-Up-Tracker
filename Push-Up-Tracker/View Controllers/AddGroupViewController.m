@@ -34,15 +34,15 @@
 }
 
 - (IBAction)onCreatePressed:(id)sender {
-    PFQuery *postQuery = [Group query];
+    PFQuery *groupQuery = [Group query];
     NSString *codeString = @"code";
     NSArray *keys = [NSArray array];
     keys = [keys arrayByAddingObject:codeString];
-    [postQuery selectKeys:keys];
-    [postQuery whereKey:codeString equalTo:self.createJoinCodeField.text];
+    [groupQuery selectKeys:keys];
+    [groupQuery whereKey:codeString equalTo:self.createJoinCodeField.text];
     
     // fetch data asynchronously
-    [postQuery findObjectsInBackgroundWithBlock:^(NSArray<Group *> * _Nullable groups, NSError * _Nullable error) {
+    [groupQuery findObjectsInBackgroundWithBlock:^(NSArray<Group *> * _Nullable groups, NSError * _Nullable error) {
         if (groups) {
             NSLog(@"groups not null");
             // do something with the data fetched
