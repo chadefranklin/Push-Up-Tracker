@@ -13,9 +13,24 @@
 @dynamic creator;
 @dynamic image;
 @dynamic createdAt;
+@dynamic name;
+@dynamic code;
 
 + (nonnull NSString *)parseClassName {
     return @"Group";
+}
+
++ (void) createGroup: ( NSString * _Nullable )name withCode: ( NSString * _Nullable )code withCompletion: (PFBooleanResultBlock  _Nullable)completion {
+    
+    Group *newGroup = [Group new];
+    newGroup.creator = [PFUser currentUser];
+    newGroup.name = name;
+    newGroup.code = code;
+    
+    PFRelation *relation = [newGroup relationForKey:@"members"];
+    [relation addObject:[PFUser currentUser]];
+    
+    [newGroup saveInBackgroundWithBlock: completion];
 }
 
 @end
