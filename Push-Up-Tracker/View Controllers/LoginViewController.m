@@ -12,6 +12,8 @@
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
 @property (weak, nonatomic) IBOutlet UITextField *passwordField;
+@property (weak, nonatomic) IBOutlet UIButton *signUpButton;
+@property (weak, nonatomic) IBOutlet UIButton *logInButton;
 
 @end
 
@@ -23,18 +25,20 @@
 }
 
 - (IBAction)onSignUpPressed:(id)sender {
-    if([self.usernameField.text isEqual:@""] || [self.passwordField.text isEqual:@""]){
-        [self fieldEmptyAlert];
-    } else {
-        [self registerUser];
-    }
+    [self registerUser];
 }
 
 - (IBAction)onLogInPressed:(id)sender {
-    if([self.usernameField.text isEqual:@""] || [self.passwordField.text isEqual:@""]){
-        [self fieldEmptyAlert];
+    [self loginUser];
+}
+
+- (IBAction)onFieldEdited:(id)sender {
+    if(self.usernameField.text.length > 0 && self.passwordField.text.length > 0){
+        self.signUpButton.enabled = YES;
+        self.logInButton.enabled = YES;
     } else {
-        [self loginUser];
+        self.signUpButton.enabled = NO;
+        self.logInButton.enabled = NO;
     }
 }
 
@@ -73,26 +77,6 @@
             // display view controller that needs to shown after successful login
             [self performSegueWithIdentifier:@"loginSegue" sender:nil];
         }
-    }];
-}
-
-
-- (void)fieldEmptyAlert{
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Empty Field"
-           message:@"Please ensure both fields are populated."
-    preferredStyle:(UIAlertControllerStyleAlert)];
-    
-    // create an OK action
-    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
-                                                       style:UIAlertActionStyleDefault
-                                                     handler:^(UIAlertAction * _Nonnull action) {
-                                                             // handle response here.
-                                                     }];
-    // add the OK action to the alert controller
-    [alert addAction:okAction];
-    
-    [self presentViewController:alert animated:YES completion:^{
-        // optional code for what happens after the alert controller has finished presenting
     }];
 }
 
