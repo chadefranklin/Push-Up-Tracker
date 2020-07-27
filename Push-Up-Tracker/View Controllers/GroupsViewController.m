@@ -29,13 +29,19 @@
     self.groupsTableView.dataSource = self;
     self.groupsTableView.delegate = self;
     
-    [self fetchGroups];
-    
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchGroups) forControlEvents:UIControlEventValueChanged];
     //[self.moviesTableView addSubview:self.refreshControl];
     [self.groupsTableView insertSubview:self.refreshControl atIndex:0];
 }
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [self fetchGroups];
+}
+
+
 
 - (void)fetchGroups{
     // construct PFQuery

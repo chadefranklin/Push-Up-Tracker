@@ -30,16 +30,49 @@
 }
 
 - (IBAction)onJoinPressed:(id)sender {
+    PFQuery *groupQuery = [Group query];
+    [groupQuery orderByDescending:@"createdAt"];
+    NSArray<NSString *> *keys = @[@"code"];
+    [groupQuery selectKeys:keys];
+    [groupQuery whereKey:@"code" equalTo:self.joinJoinCodeField.text];
     
+    // fetch data asynchronously
+    [groupQuery findObjectsInBackgroundWithBlock:^(NSArray<Group *> * _Nullable groups, NSError * _Nullable error) {
+        if (groups) {
+            NSLog(@"groups not null");
+            // do something with the data fetched
+            if(groups.count > 0){
+                // join group with index 0
+                PFRelation *relation = [groups[0] relationForKey:@"members"];
+                [relation addObject:[PFUser currentUser]];
+                
+                [groups[0] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+                    if(succeeded){
+                        NSLog(@"successfully joined group");
+                        [self.navigationController popViewControllerAnimated:YES];
+                    } else {
+                        NSLog(@"failed to join group");
+                        NSLog(error.description);
+                    }
+                }];
+            } else {
+                // no group with that code
+                [self noGroupFoundAlert];
+            }
+        }
+        else {
+            // handle error
+            NSLog(@"error checking groups' codes");
+        }
+    }];
 }
 
 - (IBAction)onCreatePressed:(id)sender {
     PFQuery *groupQuery = [Group query];
-    NSString *codeString = @"code";
-    NSArray *keys = [NSArray array];
-    keys = [keys arrayByAddingObject:codeString];
+    NSArray<NSString *> *keys = @[@"code"];
     [groupQuery selectKeys:keys];
-    [groupQuery whereKey:codeString equalTo:self.createJoinCodeField.text];
+    [groupQuery whereKey:@"code" equalTo:self.createJoinCodeField.text];
+    
     
     // fetch data asynchronously
     [groupQuery findObjectsInBackgroundWithBlock:^(NSArray<Group *> * _Nullable groups, NSError * _Nullable error) {
@@ -88,6 +121,25 @@
 - (void)codeTakenAlert{
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Code Taken"
            message:@"Please choose a new group code."
+    preferredStyle:(UIAlertControllerStyleAlert)];
+    
+    // create an OK action
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * _Nonnull action) {
+                                                             // handle response here.
+                                                     }];
+    // add the OK action to the alert controller
+    [alert addAction:okAction];
+    
+    [self presentViewController:alert animated:YES completion:^{
+        // optional code for what happens after the alert controller has finished presenting
+    }];
+}
+
+- (void)noGroupFoundAlert{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"No Group Found"
+           message:@"Please double check the group code."
     preferredStyle:(UIAlertControllerStyleAlert)];
     
     // create an OK action
