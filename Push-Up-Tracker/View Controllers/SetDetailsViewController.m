@@ -10,12 +10,14 @@
 #import "Set.h"
 //#import "SetCell.h"
 #import <Parse/Parse.h>
+#import "DateTools.h"
 
 @interface SetDetailsViewController ()
 
 @property (weak, nonatomic) IBOutlet PFImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet PFImageView *imagePreviewImageView;
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
 @property (weak, nonatomic) IBOutlet UILabel *pushupAmountLabel;
 
 @end
@@ -29,6 +31,8 @@
     self.usernameLabel.text = self.set.creator.username;
     self.imagePreviewImageView.file = self.set[@"image"];
     [self.imagePreviewImageView loadInBackground];
+    
+    self.timestampLabel.text = [self.set.createdAt timeAgoSinceNow];
 }
 
 - (IBAction)onPlayPressed:(id)sender {

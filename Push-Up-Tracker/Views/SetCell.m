@@ -7,6 +7,7 @@
 //
 
 #import "SetCell.h"
+#import "DateTools.h"
 
 @implementation SetCell
 
@@ -30,6 +31,8 @@
     //self.imagePreviewImageView.image = set.image;
     self.imagePreviewImageView.file = set[@"image"];
     [self.imagePreviewImageView loadInBackground];
+    
+    self.timestampLabel.text = [set.createdAt timeAgoSinceNow];
 }
 
 @end

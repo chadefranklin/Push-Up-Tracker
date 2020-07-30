@@ -48,7 +48,7 @@
     PFQuery *setQuery = [Set query];
     [setQuery orderByDescending:@"createdAt"];
     //NSArray<NSString *> *keys = @[@"name", @"groupImage"];
-    NSArray<NSString *> *keys = @[@"image", @"pushupAmount", @"creator", @"creator.username"];
+    NSArray<NSString *> *keys = @[@"image", @"pushupAmount", @"createdAt", @"creator", @"creator.username"];
     [setQuery selectKeys:keys];
     [setQuery whereKey:@"creator" equalTo:[PFUser currentUser]];
 
