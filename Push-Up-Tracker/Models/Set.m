@@ -22,12 +22,12 @@
 }
 
 //TODO: create set, have a NSARRAY of Groups to add relations to
-+ (void) createSet: ( NSNumber * _Nullable )pushupAmount withVideoPath: ( NSString * _Nullable )videoPath withImage: ( UIImage * _Nullable )image withCompletion: (PFBooleanResultBlock  _Nullable)completion {
++ (void) createSet: ( NSNumber * _Nullable )pushupAmount withVideoURL: ( NSURL * _Nullable )videoURL withImage: ( UIImage * _Nullable )image withCompletion: (PFBooleanResultBlock  _Nullable)completion {
     
     Set *newSet = [Set new];
     newSet.creator = [PFUser currentUser];
     newSet.image = [self getPFFileFromImage:image];
-    newSet.video = [self getPFFileFromVideoPath:videoPath];
+    newSet.video = [self getPFFileFromVideoFileURL:videoURL];
     
     // get groups that I am a member of and add my set to it via relation
     // construct PFQuery
@@ -74,7 +74,7 @@
     return [PFFileObject fileObjectWithName:@"image.png" data:imageData];
 }
 
-+ (PFFileObject *)getPFFileFromVideoPath: (NSString * _Nullable)path {
++ (PFFileObject *)getPFFileFromVideoFileURL: (NSURL * _Nullable)path {
  
     // check if path is not nil
     if (!path) {

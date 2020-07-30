@@ -19,7 +19,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSNumber *pushupAmount;
 @property (nonatomic, strong) NSDate *createdAt;
 
-+ (void) createSet: ( NSNumber * _Nullable )pushupAmount withVideoPath: ( NSString * _Nullable )videoPath withImage: ( UIImage * _Nullable )image withCompletion: (PFBooleanResultBlock  _Nullable)completion;
++ (void) createSet: ( NSNumber * _Nullable )pushupAmount withVideoURL: ( NSURL * _Nullable )videoURL withImage: ( UIImage * _Nullable )image withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 
 @end
 
