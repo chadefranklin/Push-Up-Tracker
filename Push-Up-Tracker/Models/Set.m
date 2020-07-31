@@ -16,6 +16,7 @@
 @dynamic video;
 @dynamic pushupAmount;
 @dynamic createdAt;
+@dynamic objectId;
 
 + (nonnull NSString *)parseClassName {
     return @"Set";

@@ -18,6 +18,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) PFFileObject *video;
 @property (nonatomic, strong) NSNumber *pushupAmount;
 @property (nonatomic, strong) NSDate *createdAt;
+@property (nonatomic, strong) NSString *objectId;
 
 + (void) createSet: ( NSNumber * _Nullable )pushupAmount withVideoURL: ( NSURL * _Nullable )videoURL withImage: ( UIImage * _Nullable )image withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 
