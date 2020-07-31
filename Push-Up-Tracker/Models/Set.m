@@ -88,7 +88,7 @@
         return nil;
     }
     
-    return [PFFileObject fileObjectWithName:@"video.mp4" data:videoData contentType:@"video/mp4"];
+    return [PFFileObject fileObjectWithName:@"video.mov" data:videoData contentType:@"video/quicktime"];
 }
 
 @end
