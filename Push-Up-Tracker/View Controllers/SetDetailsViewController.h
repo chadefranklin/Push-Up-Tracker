@@ -9,6 +9,13 @@
 #import <UIKit/UIKit.h>
 #import "Set.h"
 @import Parse;
+#import <Foundation/Foundation.h>
+#import <CoreMedia/CoreMedia.h>
+#import <AVFoundation/AVFoundation.h>
+#import <AVKit/AVKit.h>
+
+// Can delete if not storing videos to the photo library.  Delete the assetslibrary framework too requires this)
+#import <AssetsLibrary/AssetsLibrary.h>
 
 NS_ASSUME_NONNULL_BEGIN
 

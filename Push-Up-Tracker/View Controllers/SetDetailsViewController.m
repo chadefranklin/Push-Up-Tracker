@@ -20,6 +20,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
 @property (weak, nonatomic) IBOutlet UILabel *pushupAmountLabel;
 
+@property (weak, nonatomic) IBOutlet UIButton *playButton;
+
+@property (nonatomic) AVPlayer *aVPlayer;
 @end
 
 @implementation SetDetailsViewController
@@ -35,10 +38,51 @@
     [self.imagePreviewImageView loadInBackground];
     
     self.timestampLabel.text = [self.set.createdAt timeAgoSinceNow];
+     
+    
+    
+    PFQuery *query = [PFQuery queryWithClassName:@"Set"];
+    [query getObjectInBackgroundWithId:self.set.objectId block:^(PFObject *set, NSError *error) {
+        if (!error) {
+            // Success!
+            self.set = set;
+            
+            // enable play button
+            self.playButton.enabled = YES;
+            
+            
+            
+            NSString *outputPath = [[NSString alloc] initWithFormat:@"%@%@", NSTemporaryDirectory(), @"save.mov"];
+            NSURL *outputURL = [[NSURL alloc] initFileURLWithPath:outputPath];
+            
+            NSFileManager *fileManager = [NSFileManager defaultManager];
+            if ([fileManager fileExistsAtPath:outputPath])
+            {
+                NSError *error;
+                if ([fileManager removeItemAtPath:outputPath error:&error] == NO)
+                {
+                    //Error - handle if requried
+                }
+            }
+            
+            [self.set.video.getData writeToURL:outputURL atomically:YES];
+            
+            self.aVPlayer = [AVPlayer playerWithURL:outputURL];
+        } else {
+            // Failure!
+        }
+    }];
+     
 }
 
 - (IBAction)onPlayPressed:(id)sender {
     
+
+    // create a player view controller
+    AVPlayerViewController *controller = [[AVPlayerViewController alloc] init];
+    [self presentViewController:controller animated:YES completion:nil];
+    controller.player = self.aVPlayer;
+    [self.aVPlayer play];
 }
 
 
