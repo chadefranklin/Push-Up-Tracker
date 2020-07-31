@@ -8,6 +8,8 @@
 
 #import "ProfileViewController.h"
 #import <Parse/Parse.h>
+#import "SceneDelegate.h"
+#import "LoginViewController.h"
 
 @interface ProfileViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
@@ -25,9 +27,17 @@
 }
 
 - (IBAction)onLogOutPressed:(id)sender {
-    [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
-        [self.view.window.rootViewController dismissViewControllerAnimated:YES completion:nil];
-    }];
+    NSLog(@"onLogOutPressed");
+// Does nothing when started application with persistent login
+//    [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
+//        [self.view.window.rootViewController dismissViewControllerAnimated:YES completion:nil];
+//    }];
+    
+    SceneDelegate *sceneDelegate = (SceneDelegate *)[UIApplication sharedApplication].connectedScenes.allObjects.firstObject.delegate;
+        
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+    sceneDelegate.window.rootViewController = loginViewController;
 }
 
 /*
