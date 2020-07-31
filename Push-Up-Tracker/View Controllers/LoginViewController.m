@@ -22,6 +22,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.signUpButton.enabled = NO;
+    self.logInButton.enabled = NO;
 }
 
 - (IBAction)onSignUpPressed:(id)sender {

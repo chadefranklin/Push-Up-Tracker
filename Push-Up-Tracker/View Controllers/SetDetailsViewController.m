@@ -28,6 +28,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.playButton.enabled = NO;
+    
     self.usernameLabel.text = self.set.creator.username;
     self.imagePreviewImageView.file = self.set[@"image"];
     [self.imagePreviewImageView loadInBackground];
