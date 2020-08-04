@@ -10,10 +10,12 @@
 #import <Parse/Parse.h>
 #import "SceneDelegate.h"
 #import "LoginViewController.h"
+#import "CEFPFFileObjectHelper.h"
 
 @interface ProfileViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *rankLabel;
+@property (weak, nonatomic) IBOutlet PFImageView *profileImageView;
 
 @end
 
@@ -24,21 +26,128 @@
     // Do any additional setup after loading the view.
     
     self.usernameLabel.text = [PFUser currentUser].username;
+    self.profileImageView.file = PFUser.currentUser[@"profileImage"];
+    [self.profileImageView loadInBackground];
 }
 
 - (IBAction)onLogOutPressed:(id)sender {
     NSLog(@"onLogOutPressed");
-// Does nothing when started application with persistent login
-//    [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
-//        [self.view.window.rootViewController dismissViewControllerAnimated:YES completion:nil];
-//    }];
-    
-    SceneDelegate *sceneDelegate = (SceneDelegate *)[UIApplication sharedApplication].connectedScenes.allObjects.firstObject.delegate;
-        
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
-    sceneDelegate.window.rootViewController = loginViewController;
+    [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
+        SceneDelegate *sceneDelegate = (SceneDelegate *)[UIApplication sharedApplication].connectedScenes.allObjects.firstObject.delegate;
+            
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
+        sceneDelegate.window.rootViewController = loginViewController;
+    }];
 }
+
+- (IBAction)onProfileImagePressed:(id)sender {
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        // ask whether to use camera or photo library
+        [self profilePictureImageAlert];
+    }
+    else {
+        NSLog(@"Camera 🚫 available so we will use photo library instead");
+        //[self pickImage:NO];
+        [self profilePictureImageAlert];
+    }
+}
+
+- (void)profilePictureImageAlert{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Choose A Profile Image"
+           message:@"Please choose a photo location"
+    preferredStyle:(UIAlertControllerStyleActionSheet)];
+    
+    
+    // create a cancel action
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel"
+                                                        style:UIAlertActionStyleCancel
+                                                      handler:^(UIAlertAction * _Nonnull action) {
+                                                             // handle cancel response here. Doing nothing will dismiss the view.
+                                                      }];
+    // add the cancel action to the alertController
+    [alert addAction:cancelAction];
+
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        // create an OK action
+        UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:@"Camera"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * _Nonnull action) {
+                                                                 [self pickImage:YES];
+                                                         }];
+        // add the OK action to the alert controller
+        [alert addAction:cameraAction];
+    }
+    
+    // create an OK action
+    UIAlertAction *photoLibraryAction = [UIAlertAction actionWithTitle:@"Photo Library"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * _Nonnull action) {
+                                                             [self pickImage:NO];
+                                                     }];
+    // add the OK action to the alert controller
+    [alert addAction:photoLibraryAction];
+    
+    [self presentViewController:alert animated:YES completion:^{
+        // optional code for what happens after the alert controller has finished presenting
+        NSLog(@"alert controller finished presenting");
+    }];
+}
+
+- (void)pickImage:(BOOL)camera{
+    UIImagePickerController *imagePickerVC = [UIImagePickerController new];
+    imagePickerVC.delegate = self;
+    imagePickerVC.allowsEditing = YES;
+    
+    if (camera) {
+        imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
+    }
+    else {
+        imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+
+    [self presentViewController:imagePickerVC animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    NSLog(@"imagePickerController");
+    // Get the image captured by the UIImagePickerController
+    //UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
+    UIImage *editedImage = info[UIImagePickerControllerEditedImage];
+
+    // Do something with the images (based on your use case)
+    // Dismiss UIImagePickerController to go back to your original view controller
+    [self dismissViewControllerAnimated:YES completion:^{
+        PFUser.currentUser[@"profileImage"] = [CEFPFFileObjectHelper getPFFileFromImage:[self resizeImage:editedImage withSize:CGSizeMake(100, 100)]];
+        [PFUser.currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+            if (!error) {
+              self.profileImageView.file = PFUser.currentUser[@"profileImage"];
+              [self.profileImageView loadInBackground];
+            }
+        }];
+    }];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+    NSLog(@"cancel");
+    [self dismissViewControllerAnimated:YES completion:nil];
+    //[self.presentingViewController dismissViewControllerAnimated:true completion:nil];
+}
+
+- (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {
+    UIImageView *resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+    
+    resizeImageView.contentMode = UIViewContentModeScaleAspectFill;
+    resizeImageView.image = image;
+    
+    UIGraphicsBeginImageContext(size);
+    [resizeImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
+
 
 /*
 #pragma mark - Navigation
