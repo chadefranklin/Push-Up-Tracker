@@ -3,10 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4BB8C0DD943208269A217DDE /* Pods_Push_Up_Tracker_Push_Up_TrackerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7AEF4E853F943A0099A0F88 /* Pods_Push_Up_Tracker_Push_Up_TrackerUITests.framework */; };
+		85453C16FDAA40F48CE20373 /* Pods_Push_Up_TrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C141369CA5ABA69B0FF4902B /* Pods_Push_Up_TrackerTests.framework */; };
 		B428653724BF65E600F03109 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B428653624BF65E600F03109 /* AppDelegate.m */; };
 		B428653A24BF65E600F03109 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B428653924BF65E600F03109 /* SceneDelegate.m */; };
 		B428653D24BF65E600F03109 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B428653C24BF65E600F03109 /* ViewController.m */; };
@@ -16,6 +18,28 @@
 		B428654824BF65E800F03109 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = B428654724BF65E800F03109 /* main.m */; };
 		B428655224BF65E800F03109 /* Push_Up_TrackerTests.m in Sources */ = {isa = PBXBuildFile; fileRef = B428655124BF65E800F03109 /* Push_Up_TrackerTests.m */; };
 		B428655D24BF65E800F03109 /* Push_Up_TrackerUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = B428655C24BF65E800F03109 /* Push_Up_TrackerUITests.m */; };
+		B493ED8024D9861E0055C9D0 /* Joey-Down.wav in Resources */ = {isa = PBXBuildFile; fileRef = B493ED7C24D9861E0055C9D0 /* Joey-Down.wav */; };
+		B493ED8124D9861E0055C9D0 /* Joey-Up.wav in Resources */ = {isa = PBXBuildFile; fileRef = B493ED7D24D9861E0055C9D0 /* Joey-Up.wav */; };
+		B493ED8224D9861E0055C9D0 /* Salli-Down.wav in Resources */ = {isa = PBXBuildFile; fileRef = B493ED7E24D9861E0055C9D0 /* Salli-Down.wav */; };
+		B493ED8324D9861E0055C9D0 /* Salli-Up.wav in Resources */ = {isa = PBXBuildFile; fileRef = B493ED7F24D9861E0055C9D0 /* Salli-Up.wav */; };
+		B4EEA2A424C0C9DE00C05571 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EEA2A324C0C9DE00C05571 /* LoginViewController.m */; };
+		B4EEA2A724C0D36F00C05571 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EEA2A624C0D36F00C05571 /* ProfileViewController.m */; };
+		B4EEA2AA24C9E13300C05571 /* PushupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EEA2A924C9E13300C05571 /* PushupViewController.m */; };
+		B4EEA2AD24C9FE3600C05571 /* AddGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EEA2AC24C9FE3600C05571 /* AddGroupViewController.m */; };
+		B4EEA2B024CA008600C05571 /* GroupsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EEA2AF24CA008600C05571 /* GroupsViewController.m */; };
+		B4EEA2B324CA102100C05571 /* Group.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EEA2B224CA102100C05571 /* Group.m */; };
+		B4EEA2B624CB5F2C00C05571 /* GroupCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EEA2B524CB5F2C00C05571 /* GroupCell.m */; };
+		B4EEA2B924D09DD500C05571 /* ProfileCompletedSetsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EEA2B824D09DD500C05571 /* ProfileCompletedSetsViewController.m */; };
+		B4EEA2BC24D0A09100C05571 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4EEA2BA24D0A09100C05571 /* AVFoundation.framework */; };
+		B4EEA2BD24D0A09100C05571 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4EEA2BB24D0A09100C05571 /* AVKit.framework */; };
+		B4EEA2C024D0CEB300C05571 /* SetCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EEA2BF24D0CEB300C05571 /* SetCell.m */; };
+		B4EEA2C324D0CECC00C05571 /* Set.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EEA2C224D0CECC00C05571 /* Set.m */; };
+		B4EEA2C624D3602600C05571 /* SetDetailsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EEA2C524D3602600C05571 /* SetDetailsViewController.m */; };
+		B4EEA2C924D4C6ED00C05571 /* Goal.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EEA2C824D4C6ED00C05571 /* Goal.m */; };
+		B4EEA2CC24D800E400C05571 /* CEFPFFileObjectHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EEA2CB24D800E400C05571 /* CEFPFFileObjectHelper.m */; };
+		B4EEA2CF24D828B600C05571 /* PushupPostViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EEA2CE24D828B600C05571 /* PushupPostViewController.m */; };
+		B4EEA2D224D8AA2900C05571 /* CEFFileHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EEA2D124D8AA2900C05571 /* CEFFileHelper.m */; };
+		D6474E045D040CBC9D4FE365 /* Pods_Push_Up_Tracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5374A8E0B018A017812AD50 /* Pods_Push_Up_Tracker.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +60,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		149C62F7480DE775C44E25DA /* Pods-Push-Up-TrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Push-Up-TrackerTests.release.xcconfig"; path = "Target Support Files/Pods-Push-Up-TrackerTests/Pods-Push-Up-TrackerTests.release.xcconfig"; sourceTree = "<group>"; };
+		28CAE9F3D65D1112AD3D1AC2 /* Pods-Push-Up-TrackerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Push-Up-TrackerTests.debug.xcconfig"; path = "Target Support Files/Pods-Push-Up-TrackerTests/Pods-Push-Up-TrackerTests.debug.xcconfig"; sourceTree = "<group>"; };
+		45D0A63E4F4A8347880C09ED /* Pods-Push-Up-Tracker-Push-Up-TrackerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Push-Up-Tracker-Push-Up-TrackerUITests.debug.xcconfig"; path = "Target Support Files/Pods-Push-Up-Tracker-Push-Up-TrackerUITests/Pods-Push-Up-Tracker-Push-Up-TrackerUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		8173676FBFDACE90D23156C3 /* Pods-Push-Up-Tracker-Push-Up-TrackerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Push-Up-Tracker-Push-Up-TrackerUITests.release.xcconfig"; path = "Target Support Files/Pods-Push-Up-Tracker-Push-Up-TrackerUITests/Pods-Push-Up-Tracker-Push-Up-TrackerUITests.release.xcconfig"; sourceTree = "<group>"; };
+		A92AF6D82077891DBDC906CF /* Pods-Push-Up-Tracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Push-Up-Tracker.debug.xcconfig"; path = "Target Support Files/Pods-Push-Up-Tracker/Pods-Push-Up-Tracker.debug.xcconfig"; sourceTree = "<group>"; };
 		B428653224BF65E600F03109 /* Push-Up-Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Push-Up-Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B428653524BF65E600F03109 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B428653624BF65E600F03109 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -54,6 +83,46 @@
 		B428655824BF65E800F03109 /* Push-Up-TrackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Push-Up-TrackerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B428655C24BF65E800F03109 /* Push_Up_TrackerUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Push_Up_TrackerUITests.m; sourceTree = "<group>"; };
 		B428655E24BF65E800F03109 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B493ED7C24D9861E0055C9D0 /* Joey-Down.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Joey-Down.wav"; sourceTree = "<group>"; };
+		B493ED7D24D9861E0055C9D0 /* Joey-Up.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Joey-Up.wav"; sourceTree = "<group>"; };
+		B493ED7E24D9861E0055C9D0 /* Salli-Down.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Salli-Down.wav"; sourceTree = "<group>"; };
+		B493ED7F24D9861E0055C9D0 /* Salli-Up.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Salli-Up.wav"; sourceTree = "<group>"; };
+		B4EEA2A224C0C9DE00C05571 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		B4EEA2A324C0C9DE00C05571 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		B4EEA2A524C0D36F00C05571 /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		B4EEA2A624C0D36F00C05571 /* ProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		B4EEA2A824C9E13300C05571 /* PushupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PushupViewController.h; sourceTree = "<group>"; };
+		B4EEA2A924C9E13300C05571 /* PushupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PushupViewController.m; sourceTree = "<group>"; };
+		B4EEA2AB24C9FE3600C05571 /* AddGroupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddGroupViewController.h; sourceTree = "<group>"; };
+		B4EEA2AC24C9FE3600C05571 /* AddGroupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddGroupViewController.m; sourceTree = "<group>"; wrapsLines = 1; };
+		B4EEA2AE24CA008600C05571 /* GroupsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GroupsViewController.h; sourceTree = "<group>"; };
+		B4EEA2AF24CA008600C05571 /* GroupsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GroupsViewController.m; sourceTree = "<group>"; };
+		B4EEA2B124CA102100C05571 /* Group.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Group.h; sourceTree = "<group>"; };
+		B4EEA2B224CA102100C05571 /* Group.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Group.m; sourceTree = "<group>"; };
+		B4EEA2B424CB5F2C00C05571 /* GroupCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GroupCell.h; sourceTree = "<group>"; };
+		B4EEA2B524CB5F2C00C05571 /* GroupCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GroupCell.m; sourceTree = "<group>"; };
+		B4EEA2B724D09DD500C05571 /* ProfileCompletedSetsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileCompletedSetsViewController.h; sourceTree = "<group>"; };
+		B4EEA2B824D09DD500C05571 /* ProfileCompletedSetsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileCompletedSetsViewController.m; sourceTree = "<group>"; };
+		B4EEA2BA24D0A09100C05571 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		B4EEA2BB24D0A09100C05571 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
+		B4EEA2BE24D0CEB300C05571 /* SetCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetCell.h; sourceTree = "<group>"; };
+		B4EEA2BF24D0CEB300C05571 /* SetCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetCell.m; sourceTree = "<group>"; };
+		B4EEA2C124D0CECC00C05571 /* Set.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Set.h; sourceTree = "<group>"; };
+		B4EEA2C224D0CECC00C05571 /* Set.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Set.m; sourceTree = "<group>"; };
+		B4EEA2C424D3602600C05571 /* SetDetailsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SetDetailsViewController.h; sourceTree = "<group>"; };
+		B4EEA2C524D3602600C05571 /* SetDetailsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SetDetailsViewController.m; sourceTree = "<group>"; };
+		B4EEA2C724D4C6ED00C05571 /* Goal.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Goal.h; sourceTree = "<group>"; };
+		B4EEA2C824D4C6ED00C05571 /* Goal.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Goal.m; sourceTree = "<group>"; };
+		B4EEA2CA24D800E400C05571 /* CEFPFFileObjectHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CEFPFFileObjectHelper.h; sourceTree = "<group>"; };
+		B4EEA2CB24D800E400C05571 /* CEFPFFileObjectHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CEFPFFileObjectHelper.m; sourceTree = "<group>"; };
+		B4EEA2CD24D828B600C05571 /* PushupPostViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PushupPostViewController.h; sourceTree = "<group>"; };
+		B4EEA2CE24D828B600C05571 /* PushupPostViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PushupPostViewController.m; sourceTree = "<group>"; };
+		B4EEA2D024D8AA2900C05571 /* CEFFileHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CEFFileHelper.h; sourceTree = "<group>"; };
+		B4EEA2D124D8AA2900C05571 /* CEFFileHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CEFFileHelper.m; sourceTree = "<group>"; };
+		C141369CA5ABA69B0FF4902B /* Pods_Push_Up_TrackerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Push_Up_TrackerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C5374A8E0B018A017812AD50 /* Pods_Push_Up_Tracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Push_Up_Tracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D713EC81180F99D1739DCECC /* Pods-Push-Up-Tracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Push-Up-Tracker.release.xcconfig"; path = "Target Support Files/Pods-Push-Up-Tracker/Pods-Push-Up-Tracker.release.xcconfig"; sourceTree = "<group>"; };
+		E7AEF4E853F943A0099A0F88 /* Pods_Push_Up_Tracker_Push_Up_TrackerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Push_Up_Tracker_Push_Up_TrackerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +130,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4EEA2BC24D0A09100C05571 /* AVFoundation.framework in Frameworks */,
+				D6474E045D040CBC9D4FE365 /* Pods_Push_Up_Tracker.framework in Frameworks */,
+				B4EEA2BD24D0A09100C05571 /* AVKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -68,6 +140,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				85453C16FDAA40F48CE20373 /* Pods_Push_Up_TrackerTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -75,12 +148,38 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4BB8C0DD943208269A217DDE /* Pods_Push_Up_Tracker_Push_Up_TrackerUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		55B0CAC668665FFDD0463216 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				A92AF6D82077891DBDC906CF /* Pods-Push-Up-Tracker.debug.xcconfig */,
+				D713EC81180F99D1739DCECC /* Pods-Push-Up-Tracker.release.xcconfig */,
+				45D0A63E4F4A8347880C09ED /* Pods-Push-Up-Tracker-Push-Up-TrackerUITests.debug.xcconfig */,
+				8173676FBFDACE90D23156C3 /* Pods-Push-Up-Tracker-Push-Up-TrackerUITests.release.xcconfig */,
+				28CAE9F3D65D1112AD3D1AC2 /* Pods-Push-Up-TrackerTests.debug.xcconfig */,
+				149C62F7480DE775C44E25DA /* Pods-Push-Up-TrackerTests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		6D00E8BDEFCF0A2521E4AA20 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B4EEA2BA24D0A09100C05571 /* AVFoundation.framework */,
+				B4EEA2BB24D0A09100C05571 /* AVKit.framework */,
+				C5374A8E0B018A017812AD50 /* Pods_Push_Up_Tracker.framework */,
+				E7AEF4E853F943A0099A0F88 /* Pods_Push_Up_Tracker_Push_Up_TrackerUITests.framework */,
+				C141369CA5ABA69B0FF4902B /* Pods_Push_Up_TrackerTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B428652924BF65E600F03109 = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +187,8 @@
 				B428655024BF65E800F03109 /* Push-Up-TrackerTests */,
 				B428655B24BF65E800F03109 /* Push-Up-TrackerUITests */,
 				B428653324BF65E600F03109 /* Products */,
+				55B0CAC668665FFDD0463216 /* Pods */,
+				6D00E8BDEFCF0A2521E4AA20 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -104,6 +205,10 @@
 		B428653424BF65E600F03109 /* Push-Up-Tracker */ = {
 			isa = PBXGroup;
 			children = (
+				B493ED7324D977D20055C9D0 /* Sounds */,
+				B4EEA2A024C0C2D800C05571 /* Models */,
+				B4EEA29F24C0C2B700C05571 /* View Controllers */,
+				B4EEA2A124C0C2E200C05571 /* Views */,
 				B428653524BF65E600F03109 /* AppDelegate.h */,
 				B428653624BF65E600F03109 /* AppDelegate.m */,
 				B428653824BF65E600F03109 /* SceneDelegate.h */,
@@ -137,6 +242,68 @@
 			path = "Push-Up-TrackerUITests";
 			sourceTree = "<group>";
 		};
+		B493ED7324D977D20055C9D0 /* Sounds */ = {
+			isa = PBXGroup;
+			children = (
+				B493ED7C24D9861E0055C9D0 /* Joey-Down.wav */,
+				B493ED7E24D9861E0055C9D0 /* Salli-Down.wav */,
+				B493ED7D24D9861E0055C9D0 /* Joey-Up.wav */,
+				B493ED7F24D9861E0055C9D0 /* Salli-Up.wav */,
+			);
+			path = Sounds;
+			sourceTree = "<group>";
+		};
+		B4EEA29F24C0C2B700C05571 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B4EEA2A224C0C9DE00C05571 /* LoginViewController.h */,
+				B4EEA2A324C0C9DE00C05571 /* LoginViewController.m */,
+				B4EEA2A524C0D36F00C05571 /* ProfileViewController.h */,
+				B4EEA2A624C0D36F00C05571 /* ProfileViewController.m */,
+				B4EEA2A824C9E13300C05571 /* PushupViewController.h */,
+				B4EEA2A924C9E13300C05571 /* PushupViewController.m */,
+				B4EEA2AB24C9FE3600C05571 /* AddGroupViewController.h */,
+				B4EEA2AC24C9FE3600C05571 /* AddGroupViewController.m */,
+				B4EEA2AE24CA008600C05571 /* GroupsViewController.h */,
+				B4EEA2AF24CA008600C05571 /* GroupsViewController.m */,
+				B4EEA2B724D09DD500C05571 /* ProfileCompletedSetsViewController.h */,
+				B4EEA2B824D09DD500C05571 /* ProfileCompletedSetsViewController.m */,
+				B4EEA2C424D3602600C05571 /* SetDetailsViewController.h */,
+				B4EEA2C524D3602600C05571 /* SetDetailsViewController.m */,
+				B4EEA2CD24D828B600C05571 /* PushupPostViewController.h */,
+				B4EEA2CE24D828B600C05571 /* PushupPostViewController.m */,
+			);
+			path = "View Controllers";
+			sourceTree = "<group>";
+		};
+		B4EEA2A024C0C2D800C05571 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B4EEA2B124CA102100C05571 /* Group.h */,
+				B4EEA2B224CA102100C05571 /* Group.m */,
+				B4EEA2C124D0CECC00C05571 /* Set.h */,
+				B4EEA2C224D0CECC00C05571 /* Set.m */,
+				B4EEA2C724D4C6ED00C05571 /* Goal.h */,
+				B4EEA2C824D4C6ED00C05571 /* Goal.m */,
+				B4EEA2CA24D800E400C05571 /* CEFPFFileObjectHelper.h */,
+				B4EEA2CB24D800E400C05571 /* CEFPFFileObjectHelper.m */,
+				B4EEA2D024D8AA2900C05571 /* CEFFileHelper.h */,
+				B4EEA2D124D8AA2900C05571 /* CEFFileHelper.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B4EEA2A124C0C2E200C05571 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				B4EEA2B424CB5F2C00C05571 /* GroupCell.h */,
+				B4EEA2B524CB5F2C00C05571 /* GroupCell.m */,
+				B4EEA2BE24D0CEB300C05571 /* SetCell.h */,
+				B4EEA2BF24D0CEB300C05571 /* SetCell.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -144,9 +311,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B428656124BF65E800F03109 /* Build configuration list for PBXNativeTarget "Push-Up-Tracker" */;
 			buildPhases = (
+				2A82864AC94C9F0AE94B311B /* [CP] Check Pods Manifest.lock */,
 				B428652E24BF65E600F03109 /* Sources */,
 				B428652F24BF65E600F03109 /* Frameworks */,
 				B428653024BF65E600F03109 /* Resources */,
+				9005CC83C1C02EB9C113B0D5 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -161,6 +330,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B428656424BF65E800F03109 /* Build configuration list for PBXNativeTarget "Push-Up-TrackerTests" */;
 			buildPhases = (
+				A6EA1F2AEF038AEF4BD4E1AA /* [CP] Check Pods Manifest.lock */,
 				B428654924BF65E800F03109 /* Sources */,
 				B428654A24BF65E800F03109 /* Frameworks */,
 				B428654B24BF65E800F03109 /* Resources */,
@@ -179,9 +349,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B428656724BF65E800F03109 /* Build configuration list for PBXNativeTarget "Push-Up-TrackerUITests" */;
 			buildPhases = (
+				9D664A3D706EB17E15DEF617 /* [CP] Check Pods Manifest.lock */,
 				B428655424BF65E800F03109 /* Sources */,
 				B428655524BF65E800F03109 /* Frameworks */,
 				B428655624BF65E800F03109 /* Resources */,
+				FFAB6A6BA9B1C7767B9D4B45 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -241,6 +413,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B428654524BF65E800F03109 /* LaunchScreen.storyboard in Resources */,
+				B493ED8124D9861E0055C9D0 /* Joey-Up.wav in Resources */,
+				B493ED8224D9861E0055C9D0 /* Salli-Down.wav in Resources */,
+				B493ED8024D9861E0055C9D0 /* Joey-Down.wav in Resources */,
+				B493ED8324D9861E0055C9D0 /* Salli-Up.wav in Resources */,
 				B428654224BF65E800F03109 /* Assets.xcassets in Resources */,
 				B428654024BF65E600F03109 /* Main.storyboard in Resources */,
 			);
@@ -262,15 +438,133 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2A82864AC94C9F0AE94B311B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Push-Up-Tracker-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9005CC83C1C02EB9C113B0D5 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Push-Up-Tracker/Pods-Push-Up-Tracker-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Push-Up-Tracker/Pods-Push-Up-Tracker-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Push-Up-Tracker/Pods-Push-Up-Tracker-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9D664A3D706EB17E15DEF617 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Push-Up-Tracker-Push-Up-TrackerUITests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A6EA1F2AEF038AEF4BD4E1AA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-Push-Up-TrackerTests-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FFAB6A6BA9B1C7767B9D4B45 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Push-Up-Tracker-Push-Up-TrackerUITests/Pods-Push-Up-Tracker-Push-Up-TrackerUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Push-Up-Tracker-Push-Up-TrackerUITests/Pods-Push-Up-Tracker-Push-Up-TrackerUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Push-Up-Tracker-Push-Up-TrackerUITests/Pods-Push-Up-Tracker-Push-Up-TrackerUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		B428652E24BF65E600F03109 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B4EEA2AD24C9FE3600C05571 /* AddGroupViewController.m in Sources */,
+				B4EEA2C024D0CEB300C05571 /* SetCell.m in Sources */,
+				B4EEA2C324D0CECC00C05571 /* Set.m in Sources */,
 				B428653D24BF65E600F03109 /* ViewController.m in Sources */,
+				B4EEA2C924D4C6ED00C05571 /* Goal.m in Sources */,
 				B428653724BF65E600F03109 /* AppDelegate.m in Sources */,
 				B428654824BF65E800F03109 /* main.m in Sources */,
+				B4EEA2D224D8AA2900C05571 /* CEFFileHelper.m in Sources */,
+				B4EEA2B624CB5F2C00C05571 /* GroupCell.m in Sources */,
+				B4EEA2B024CA008600C05571 /* GroupsViewController.m in Sources */,
+				B4EEA2CF24D828B600C05571 /* PushupPostViewController.m in Sources */,
 				B428653A24BF65E600F03109 /* SceneDelegate.m in Sources */,
+				B4EEA2AA24C9E13300C05571 /* PushupViewController.m in Sources */,
+				B4EEA2CC24D800E400C05571 /* CEFPFFileObjectHelper.m in Sources */,
+				B4EEA2B324CA102100C05571 /* Group.m in Sources */,
+				B4EEA2A724C0D36F00C05571 /* ProfileViewController.m in Sources */,
+				B4EEA2A424C0C9DE00C05571 /* LoginViewController.m in Sources */,
+				B4EEA2C624D3602600C05571 /* SetDetailsViewController.m in Sources */,
+				B4EEA2B924D09DD500C05571 /* ProfileCompletedSetsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,6 +731,7 @@
 		};
 		B428656224BF65E800F03109 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = A92AF6D82077891DBDC906CF /* Pods-Push-Up-Tracker.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -454,6 +749,7 @@
 		};
 		B428656324BF65E800F03109 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D713EC81180F99D1739DCECC /* Pods-Push-Up-Tracker.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -471,6 +767,7 @@
 		};
 		B428656524BF65E800F03109 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 28CAE9F3D65D1112AD3D1AC2 /* Pods-Push-Up-TrackerTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -491,6 +788,7 @@
 		};
 		B428656624BF65E800F03109 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 149C62F7480DE775C44E25DA /* Pods-Push-Up-TrackerTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
@@ -511,6 +809,7 @@
 		};
 		B428656824BF65E800F03109 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 45D0A63E4F4A8347880C09ED /* Pods-Push-Up-Tracker-Push-Up-TrackerUITests.debug.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D28L47T38U;
@@ -529,6 +828,7 @@
 		};
 		B428656924BF65E800F03109 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 8173676FBFDACE90D23156C3 /* Pods-Push-Up-Tracker-Push-Up-TrackerUITests.release.xcconfig */;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = D28L47T38U;
