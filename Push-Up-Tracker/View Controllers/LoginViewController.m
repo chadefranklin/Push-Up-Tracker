@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import <Parse/Parse.h>
+#import "CEFPFFileObjectHelper.h"
 
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
@@ -28,7 +29,8 @@
 }
 
 - (IBAction)onSignUpPressed:(id)sender {
-    [self registerUser];
+    //[self registerUser];
+    [self profilePictureImageAlert];
 }
 
 - (IBAction)onLogInPressed:(id)sender {
@@ -45,18 +47,21 @@
     }
 }
 
-- (void)registerUser {
+- (void)registerUser:(UIImage*)profileImage {
+    NSLog(@"register user");
     // initialize a user object
     PFUser *newUser = [PFUser user];
     
     // set user properties
     newUser.username = self.usernameField.text;
-    //newUser.email = self.emailField.text;
     newUser.password = self.passwordField.text;
+    newUser[@"totalPushups"] = @(0);
+    newUser[@"maxPushups"] = @(0);
+    newUser[@"profileImage"] = [CEFPFFileObjectHelper getPFFileFromImage:profileImage];
     
     // call sign up function on the object
     [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
-        if (error != nil) {
+        if (error) {
             NSLog(@"Error: %@", error.localizedDescription);
         } else {
             NSLog(@"User registered successfully");
@@ -82,6 +87,98 @@
         }
     }];
 }
+
+- (void)profilePictureImageAlert{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Choose A Profile Image"
+           message:@"Please choose a photo location"
+    preferredStyle:(UIAlertControllerStyleActionSheet)];
+    
+    
+    // create a cancel action
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel"
+                                                        style:UIAlertActionStyleCancel
+                                                      handler:^(UIAlertAction * _Nonnull action) {
+                                                             // handle cancel response here. Doing nothing will dismiss the view.
+                                                      }];
+    // add the cancel action to the alertController
+    [alert addAction:cancelAction];
+
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        // create an OK action
+        UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:@"Camera"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * _Nonnull action) {
+                                                                 [self pickImage:YES];
+                                                         }];
+        // add the OK action to the alert controller
+        [alert addAction:cameraAction];
+    }
+    
+    // create an OK action
+    UIAlertAction *photoLibraryAction = [UIAlertAction actionWithTitle:@"Photo Library"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * _Nonnull action) {
+                                                             [self pickImage:NO];
+                                                     }];
+    // add the OK action to the alert controller
+    [alert addAction:photoLibraryAction];
+    
+    [self presentViewController:alert animated:YES completion:^{
+        // optional code for what happens after the alert controller has finished presenting
+        NSLog(@"alert controller finished presenting");
+    }];
+}
+
+- (void)pickImage:(BOOL)camera{
+    UIImagePickerController *imagePickerVC = [UIImagePickerController new];
+    imagePickerVC.delegate = self;
+    imagePickerVC.allowsEditing = YES;
+    
+    if (camera) {
+        imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
+    }
+    else {
+        imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+
+    [self presentViewController:imagePickerVC animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    NSLog(@"imagePickerController");
+    // Get the image captured by the UIImagePickerController
+    //UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
+    UIImage *editedImage = info[UIImagePickerControllerEditedImage];
+
+    // Do something with the images (based on your use case)
+    // Dismiss UIImagePickerController to go back to your original view controller
+    [self dismissViewControllerAnimated:YES completion:^{
+        [self registerUser:[self resizeImage:editedImage withSize:CGSizeMake(100, 100)]];
+    }];
+    //[self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+    NSLog(@"cancel");
+    [self dismissViewControllerAnimated:YES completion:nil];
+    //[self.presentingViewController dismissViewControllerAnimated:true completion:nil];
+}
+
+- (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {
+    UIImageView *resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+    
+    resizeImageView.contentMode = UIViewContentModeScaleAspectFill;
+    resizeImageView.image = image;
+    
+    UIGraphicsBeginImageContext(size);
+    [resizeImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
+
+
 
 
 /*
