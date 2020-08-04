@@ -15,6 +15,7 @@
 @dynamic createdAt;
 @dynamic name;
 @dynamic code;
+@dynamic totalPushups;
 
 + (nonnull NSString *)parseClassName {
     return @"Group";
