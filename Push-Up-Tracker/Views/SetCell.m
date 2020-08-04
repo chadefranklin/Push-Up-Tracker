@@ -28,9 +28,12 @@
     //[self.groupImageView loadInBackground];
     
     self.usernameLabel.text = set.creator.username;
-    //self.imagePreviewImageView.image = set.image;
     self.imagePreviewImageView.file = set[@"image"];
     [self.imagePreviewImageView loadInBackground];
+    self.profileImageView.file = set.creator[@"profileImage"];
+    [self.profileImageView loadInBackground];
+    
+    self.pushupAmountLabel.text = [[set.pushupAmount stringValue] stringByAppendingString:@" Pushups"];
     
     self.timestampLabel.text = [set.createdAt timeAgoSinceNow];
 }
