@@ -8,6 +8,7 @@
 
 #import "Set.h"
 #import "Group.h"
+#import "CEFPFFileObjectHelper.h"
 
 @implementation Set
 
@@ -26,9 +27,11 @@
 + (void) createSet: ( NSNumber * _Nullable )pushupAmount withVideoURL: ( NSURL * _Nullable )videoURL withImage: ( UIImage * _Nullable )image withCompletion: (PFBooleanResultBlock  _Nullable)completion {
     
     Set *newSet = [Set new];
+    newSet.pushupAmount = pushupAmount;
     newSet.creator = [PFUser currentUser];
-    newSet.image = [self getPFFileFromImage:image];
-    newSet.video = [self getPFFileFromVideoFileURL:videoURL];
+    newSet.image = [CEFPFFileObjectHelper getPFFileFromImage:image];
+    newSet.video = [CEFPFFileObjectHelper getPFFileFromVideoFileURL:videoURL];
+    
     
     // get groups that I am a member of and add my set to it via relation
     // construct PFQuery
@@ -45,50 +48,26 @@
             for(int i = 0; i < groups.count; i++){
                 PFRelation *relation = [groups[i] relationForKey:@"sets"];
                 [relation addObject:newSet];
-                // maybe increment a totalPushups int on the group
+                [groups[i] incrementKey:@"totalPushups" byAmount:pushupAmount];
+                // increment pushupAmount on the current goal
                 
-                [groups[i] saveInBackground];
+                //[groups[i] saveInBackground];
             }
+            [PFObject saveAllInBackground:groups];
         }
         else {
             // handle error
         }
     }];
     
+    // ask about this
+    [PFUser.currentUser incrementKey:@"totalPushups" byAmount:pushupAmount];
+    if(pushupAmount > PFUser.currentUser[@"maxPushups"]){
+        PFUser.currentUser[@"maxPushups"] = pushupAmount;
+    }
+    [PFUser.currentUser saveInBackground];
+    
     [newSet saveInBackgroundWithBlock: completion];
-}
-
-+ (PFFileObject *)getPFFileFromImage: (UIImage * _Nullable)image {
- 
-    // check if image is not nil
-    if (!image) {
-        return nil;
-    }
-    
-    NSData *imageData = UIImagePNGRepresentation(image);
-    // get image data and check if that is not nil
-    if (!imageData) {
-        return nil;
-    }
-    
-    //return [PFFileObject fileWithName:@"image.png" data:imageData];
-    return [PFFileObject fileObjectWithName:@"image.png" data:imageData];
-}
-
-+ (PFFileObject *)getPFFileFromVideoFileURL: (NSURL * _Nullable)path {
- 
-    // check if path is not nil
-    if (!path) {
-        return nil;
-    }
-    
-    //NSData *videoData = [NSData dataWithContentsOfFile:path options:NSDataReadingMappedAlways error:<#(NSError *__autoreleasing  _Nullable * _Nullable)#>];
-    NSData *videoData = [NSData dataWithContentsOfURL:path];
-    if (!videoData) {
-        return nil;
-    }
-    
-    return [PFFileObject fileObjectWithName:@"video.mov" data:videoData contentType:@"video/quicktime"];
 }
 
 @end
