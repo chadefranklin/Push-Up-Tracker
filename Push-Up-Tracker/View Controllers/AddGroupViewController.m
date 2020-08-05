@@ -74,7 +74,7 @@
     [groupQuery whereKey:@"code" equalTo:self.createJoinCodeField.text];
     
     
-    // fetch data asynchronously
+    // fetch data asynchronously (check if group code exists already)
     [groupQuery findObjectsInBackgroundWithBlock:^(NSArray<Group *> * _Nullable groups, NSError * _Nullable error) {
         if (groups) {
             NSLog(@"groups not null");
@@ -83,16 +83,8 @@
                 // need to choose new code
                 [self codeTakenAlert];
             } else {
-                // create group
-                [Group createGroup:self.createGroupNameField.text withCode:self.createJoinCodeField.text withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
-                    if(succeeded){
-                        NSLog(@"success");
-                        [self.navigationController popViewControllerAnimated:YES];
-                    } else {
-                        NSLog(@"fail");
-                        NSLog(error.description);
-                    }
-                }];
+                // choose image
+                [self groupImageAlert];
             }
         }
         else {
@@ -117,6 +109,11 @@
         self.createButton.enabled = NO;
     }
 }
+
+- (IBAction)onBackdropTapped:(id)sender {
+    [self.view endEditing:YES];
+}
+
 
 - (void)codeTakenAlert{
     UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Code Taken"
@@ -154,6 +151,127 @@
     [self presentViewController:alert animated:YES completion:^{
         // optional code for what happens after the alert controller has finished presenting
     }];
+}
+
+
+
+- (void)groupImageAlert{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Choose A Group Image"
+           message:@"Please choose a photo location"
+    preferredStyle:(UIAlertControllerStyleActionSheet)];
+    
+    
+    // create a cancel action
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel"
+                                                        style:UIAlertActionStyleCancel
+                                                      handler:^(UIAlertAction * _Nonnull action) {
+                                                             // handle cancel response here. Doing nothing will dismiss the view.
+                                                      }];
+    // add the cancel action to the alertController
+    [alert addAction:cancelAction];
+
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        // create an OK action
+        UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:@"Camera"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * _Nonnull action) {
+                                                                 [self pickImage:YES];
+                                                         }];
+        // add the OK action to the alert controller
+        [alert addAction:cameraAction];
+    }
+    
+    // create an OK action
+    UIAlertAction *photoLibraryAction = [UIAlertAction actionWithTitle:@"Photo Library"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * _Nonnull action) {
+                                                             [self pickImage:NO];
+                                                     }];
+    // add the OK action to the alert controller
+    [alert addAction:photoLibraryAction];
+    
+    [self presentViewController:alert animated:YES completion:^{
+        // optional code for what happens after the alert controller has finished presenting
+        NSLog(@"alert controller finished presenting");
+    }];
+}
+
+- (void)pickImage:(BOOL)camera{
+    UIImagePickerController *imagePickerVC = [UIImagePickerController new];
+    imagePickerVC.delegate = self;
+    imagePickerVC.allowsEditing = YES;
+    
+    if (camera) {
+        imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
+    }
+    else {
+        imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+
+    [self presentViewController:imagePickerVC animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    NSLog(@"imagePickerController");
+    // Get the image captured by the UIImagePickerController
+    //UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
+    UIImage *editedImage = info[UIImagePickerControllerEditedImage];
+
+    // Do something with the images (based on your use case)
+    // Dismiss UIImagePickerController to go back to your original view controller
+    [self dismissViewControllerAnimated:YES completion:^{
+        PFQuery *groupQuery = [Group query];
+        NSArray<NSString *> *keys = @[@"code"];
+        [groupQuery selectKeys:keys];
+        [groupQuery whereKey:@"code" equalTo:self.createJoinCodeField.text];
+        
+        // fetch data asynchronously (check again if group code exists already because it's possible someone made a group while we were choosing image)
+        [groupQuery findObjectsInBackgroundWithBlock:^(NSArray<Group *> * _Nullable groups, NSError * _Nullable error) {
+            if (groups) {
+                NSLog(@"groups not null");
+                // do something with the data fetched
+                if(groups.count > 0){
+                    // need to choose new code
+                    [self codeTakenAlert];
+                } else {
+                    // create group
+                    [Group createGroup:self.createGroupNameField.text withCode:self.createJoinCodeField.text withImage:[self resizeImage:editedImage withSize:CGSizeMake(100, 100)] withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+                        if(succeeded){
+                            NSLog(@"success");
+                            [self.navigationController popViewControllerAnimated:YES];
+                        } else {
+                            NSLog(@"fail");
+                            NSLog(error.description);
+                        }
+                    }];
+                }
+            }
+            else {
+                // handle error
+                NSLog(@"error checking groups' codes");
+            }
+        }];
+    }];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+    NSLog(@"cancel");
+    [self dismissViewControllerAnimated:YES completion:nil];
+    //[self.presentingViewController dismissViewControllerAnimated:true completion:nil];
+}
+
+- (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {
+    UIImageView *resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+    
+    resizeImageView.contentMode = UIViewContentModeScaleAspectFill;
+    resizeImageView.image = image;
+    
+    UIGraphicsBeginImageContext(size);
+    [resizeImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
 }
 
 /*
