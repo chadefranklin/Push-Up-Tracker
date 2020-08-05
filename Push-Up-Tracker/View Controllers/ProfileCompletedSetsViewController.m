@@ -35,8 +35,8 @@
     [self.setsTableView insertSubview:self.refreshControl atIndex:0];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
     [self fetchSets];
 }
@@ -44,13 +44,14 @@
 
 
 - (void)fetchSets{
+    //TODO: Use Relation for Profile Sets instead of finding based on creator
     // construct PFQuery
     PFQuery *setQuery = [Set query];
     [setQuery orderByDescending:@"createdAt"];
     //NSArray<NSString *> *keys = @[@"name", @"groupImage"];
     NSArray<NSString *> *keys = @[@"image", @"pushupAmount", @"createdAt", @"objectId", @"creator", @"creator.username", @"creator.profileImage"];
     [setQuery selectKeys:keys];
-    [setQuery whereKey:@"creator" equalTo:[PFUser currentUser]];
+    [setQuery whereKey:@"creator" equalTo:self.user];
 
     // fetch data asynchronously
     [setQuery findObjectsInBackgroundWithBlock:^(NSArray<Set *> * _Nullable sets, NSError * _Nullable error) {
