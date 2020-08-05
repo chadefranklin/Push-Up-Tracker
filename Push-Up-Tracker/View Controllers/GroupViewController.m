@@ -9,6 +9,7 @@
 #import "GroupViewController.h"
 #import <Parse/Parse.h>
 #import "EditGroupViewController.h"
+#import "GroupCompletedSetsViewController.h"
 
 @interface GroupViewController ()
 
@@ -70,6 +71,9 @@
     if ([segue.identifier isEqualToString:@"toEditGroupSegue"]) {
         EditGroupViewController *editGroupViewController = (EditGroupViewController*)[segue destinationViewController];
         editGroupViewController.group = self.group;
+    } else if([segue.identifier isEqualToString:@"toGroupCompletedSetsSegue"]){
+        GroupCompletedSetsViewController *groupCompletedSetsViewController = (GroupCompletedSetsViewController*)[segue destinationViewController];
+        groupCompletedSetsViewController.group = self.group;
     }
 }
 
