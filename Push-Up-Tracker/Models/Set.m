@@ -32,7 +32,6 @@
     newSet.image = [CEFPFFileObjectHelper getPFFileFromImage:image];
     newSet.video = [CEFPFFileObjectHelper getPFFileFromVideoFileURL:videoURL];
     
-    
     // get groups that I am a member of and add my set to it via relation
     // construct PFQuery
     PFQuery *groupQuery = [Group query];

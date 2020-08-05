@@ -20,7 +20,6 @@
     // Override point for customization after application launch.
     
     ParseClientConfiguration *config = [ParseClientConfiguration   configurationWithBlock:^(id<ParseMutableClientConfiguration> configuration) {
-        
         configuration.applicationId = @"pushUpTracker";
         configuration.server = @"https://push-up-tracker.herokuapp.com/parse";
     }];

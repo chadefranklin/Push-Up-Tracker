@@ -7,7 +7,6 @@
 //
 
 #import "SetDetailsViewController.h"
-#import "Set.h"
 //#import "SetCell.h"
 #import <Parse/Parse.h>
 #import "DateTools.h"

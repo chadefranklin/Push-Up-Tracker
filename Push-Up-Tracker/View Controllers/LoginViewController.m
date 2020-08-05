@@ -155,7 +155,6 @@
     [self dismissViewControllerAnimated:YES completion:^{
         [self registerUser:[self resizeImage:editedImage withSize:CGSizeMake(100, 100)]];
     }];
-    //[self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
