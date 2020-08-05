@@ -33,7 +33,11 @@
     self.profileImageView.file = set.creator[@"profileImage"];
     [self.profileImageView loadInBackground];
     
-    self.pushupAmountLabel.text = [[set.pushupAmount stringValue] stringByAppendingString:@" Pushups"];
+    if([set.pushupAmount intValue] == 1){
+        self.pushupAmountLabel.text = [[set.pushupAmount stringValue] stringByAppendingString:@" Pushup"];
+    } else {
+        self.pushupAmountLabel.text = [[set.pushupAmount stringValue] stringByAppendingString:@" Pushups"];
+    }
     
     self.timestampLabel.text = [set.createdAt timeAgoSinceNow];
 }
