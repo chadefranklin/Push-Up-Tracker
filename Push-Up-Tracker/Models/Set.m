@@ -26,6 +26,13 @@
 //TODO: create set, have a NSARRAY of Groups to add relations to
 + (void) createSet: ( NSNumber * _Nullable )pushupAmount withVideoURL: ( NSURL * _Nullable )videoURL withImage: ( UIImage * _Nullable )image withCompletion: (PFBooleanResultBlock  _Nullable)completion {
     
+    // ask about this
+    [PFUser.currentUser incrementKey:@"totalPushups" byAmount:pushupAmount];
+    if(pushupAmount > PFUser.currentUser[@"maxPushups"]){
+        PFUser.currentUser[@"maxPushups"] = pushupAmount;
+    }
+    [PFUser.currentUser saveInBackground];
+    
     Set *newSet = [Set new];
     newSet.pushupAmount = pushupAmount;
     newSet.creator = [PFUser currentUser];
@@ -39,34 +46,28 @@
     NSArray<NSString *> *keys = @[@"name"];
     [groupQuery selectKeys:keys];
     [groupQuery whereKey:@"members" equalTo:[PFUser currentUser]];
-
-    // fetch data asynchronously
-    [groupQuery findObjectsInBackgroundWithBlock:^(NSArray<Group *> * _Nullable groups, NSError * _Nullable error) {
-        if (groups) {
-            // do something with the data fetched
-            for(int i = 0; i < groups.count; i++){
-                PFRelation *relation = [groups[i] relationForKey:@"sets"];
-                [relation addObject:newSet];
-                [groups[i] incrementKey:@"totalPushups" byAmount:pushupAmount];
-                // increment pushupAmount on the current goal
-                
-                //[groups[i] saveInBackground];
+    
+    [newSet saveInBackgroundWithBlock:^(BOOL succeeded, NSError * error){
+        // fetch data asynchronously
+        [groupQuery findObjectsInBackgroundWithBlock:^(NSArray<Group *> * _Nullable groups, NSError * _Nullable error) {
+            if (groups) {
+                // do something with the data fetched
+                for(int i = 0; i < groups.count; i++){
+                    PFRelation *relation = [groups[i] relationForKey:@"sets"];
+                    [relation addObject:newSet];
+                    [groups[i] incrementKey:@"totalPushups" byAmount:pushupAmount];
+                    // increment pushupAmount on the current goal
+                    
+                    //[groups[i] saveInBackground];
+                }
+                [PFObject saveAllInBackground:groups block:completion];
             }
-            [PFObject saveAllInBackground:groups];
-        }
-        else {
-            // handle error
-        }
+            else {
+                // handle error
+            }
+        }];
     }];
     
-    // ask about this
-    [PFUser.currentUser incrementKey:@"totalPushups" byAmount:pushupAmount];
-    if(pushupAmount > PFUser.currentUser[@"maxPushups"]){
-        PFUser.currentUser[@"maxPushups"] = pushupAmount;
-    }
-    [PFUser.currentUser saveInBackground];
-    
-    [newSet saveInBackgroundWithBlock: completion];
 }
 
 @end
