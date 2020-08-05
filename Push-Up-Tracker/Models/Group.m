@@ -7,6 +7,7 @@
 //
 
 #import "Group.h"
+#import "CEFPFFileObjectHelper.h"
 
 @implementation Group
 
@@ -21,12 +22,14 @@
     return @"Group";
 }
 
-+ (void) createGroup: ( NSString * _Nullable )name withCode: ( NSString * _Nullable )code withCompletion: (PFBooleanResultBlock  _Nullable)completion {
++ (void) createGroup: ( NSString * _Nullable )name withCode: ( NSString * _Nullable )code withImage: ( UIImage * _Nullable )image withCompletion: (PFBooleanResultBlock  _Nullable)completion {
     
     Group *newGroup = [Group new];
     newGroup.creator = [PFUser currentUser];
+    newGroup.image = [CEFPFFileObjectHelper getPFFileFromImage:image];
     newGroup.name = name;
     newGroup.code = code;
+    newGroup.totalPushups = @(0);
     
     PFRelation *relation = [newGroup relationForKey:@"members"];
     [relation addObject:[PFUser currentUser]];

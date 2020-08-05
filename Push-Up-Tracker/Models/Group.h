@@ -20,7 +20,7 @@ NS_ASSUME_NONNULL_BEGIN
 @property (nonatomic, strong) NSString *code;
 @property (nonatomic, strong) NSNumber *totalPushups;
 
-+ (void) createGroup: ( NSString * _Nullable )name withCode: ( NSString * _Nullable )code withCompletion: (PFBooleanResultBlock  _Nullable)completion;
++ (void) createGroup: ( NSString * _Nullable )name withCode: ( NSString * _Nullable )code withImage: ( UIImage * _Nullable )image withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 
 @end
 

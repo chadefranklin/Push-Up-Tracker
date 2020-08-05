@@ -26,8 +26,8 @@
 
 - (void)setGroup:(Group *)group {
     _group = group;
-    //self.groupImageView.file = group[@"image"];
-    //[self.groupImageView loadInBackground];
+    self.groupImageView.file = group[@"image"];
+    [self.groupImageView loadInBackground];
     
     self.groupNameLabel.text = group.name;
 }
