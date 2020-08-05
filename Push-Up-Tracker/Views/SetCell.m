@@ -38,4 +38,9 @@
     self.timestampLabel.text = [set.createdAt timeAgoSinceNow];
 }
 
+- (IBAction)onProfileImagePressed:(id)sender {
+    [self.groupCompletedSetsViewController profilePicturePressed:self.set.creator];
+}
+
+
 @end
