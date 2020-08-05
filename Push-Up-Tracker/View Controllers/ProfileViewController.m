@@ -10,11 +10,16 @@
 #import "SceneDelegate.h"
 #import "LoginViewController.h"
 #import "CEFPFFileObjectHelper.h"
+#import "ProfileCompletedSetsViewController.h"
+#import "RankingSystem.h"
+#import <Parse/Parse.h>
 
 @interface ProfileViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
 @property (weak, nonatomic) IBOutlet UILabel *rankLabel;
 @property (weak, nonatomic) IBOutlet PFImageView *profileImageView;
+@property (weak, nonatomic) IBOutlet UILabel *maxPushupsLabel;
+@property (weak, nonatomic) IBOutlet UILabel *totalPushupsLabel;
 
 @end
 
@@ -27,6 +32,10 @@
     self.usernameLabel.text = [PFUser currentUser].username;
     self.profileImageView.file = PFUser.currentUser[@"profileImage"];
     [self.profileImageView loadInBackground];
+    
+    self.totalPushupsLabel.text = [@"Total Pushups: " stringByAppendingString:[PFUser.currentUser[@"totalPushups"] stringValue]];
+    self.maxPushupsLabel.text = [@"Max Pushups: " stringByAppendingString:[PFUser.currentUser[@"maxPushups"] stringValue]];
+    self.rankLabel.text = [RankingSystem getRankForMaxPushups:PFUser.currentUser[@"maxPushups"]];
 }
 
 - (IBAction)onLogOutPressed:(id)sender {
