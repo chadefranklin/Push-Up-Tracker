@@ -1,5 +1,6 @@
 # Uncomment the next line to define a global platform for your project
 # platform :ios, '9.0'
+ENV['SWIFT_VERSION'] = '5'
 
 target 'Push-Up-Tracker' do
   # Comment the next line if you don't want to use dynamic frameworks
@@ -11,6 +12,7 @@ target 'Push-Up-Tracker' do
   pod 'SZTextView'
   pod 'DateTools'
   pod 'MBProgressHUD', '~> 1.2.0'
+  pod "LinearProgressBar"
 
   target 'Push-Up-TrackerTests' do
     inherit! :search_paths
