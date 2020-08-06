@@ -32,6 +32,10 @@
     self.usernameLabel.text = [PFUser currentUser].username;
     self.profileImageView.file = PFUser.currentUser[@"profileImage"];
     [self.profileImageView loadInBackground];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     
     self.totalPushupsLabel.text = [@"Total Pushups: " stringByAppendingString:[PFUser.currentUser[@"totalPushups"] stringValue]];
     self.maxPushupsLabel.text = [@"Max Pushups: " stringByAppendingString:[PFUser.currentUser[@"maxPushups"] stringValue]];

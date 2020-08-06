@@ -27,24 +27,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-//    if([self.group.creator.objectId isEqualToString:PFUser.currentUser.objectId]){
-//        NSLog(@"My Group");
-//        self.editButton.enabled = YES;
-//    } else {
-//        NSLog(@"Not My Group");
-//        self.editButton.enabled = NO;
-//    }
-//
-//    self.groupNameLabel.text = self.group.name;
-//    self.groupPictureImageView.file = self.group[@"image"];
-//    [self.groupPictureImageView loadInBackground];
-//
-//    self.totalPushupsLabel.text = [@"Total Pushups: " stringByAppendingString:[self.group.totalPushups stringValue]];
-}
-
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
-    
     if([self.group.creator.objectId isEqualToString:PFUser.currentUser.objectId]){
         NSLog(@"My Group");
         self.editButton.enabled = YES;
@@ -52,10 +34,14 @@
         NSLog(@"Not My Group");
         self.editButton.enabled = NO;
     }
-    
+
     self.groupNameLabel.text = self.group.name;
     self.groupPictureImageView.file = self.group[@"image"];
     [self.groupPictureImageView loadInBackground];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
     
     self.totalPushupsLabel.text = [@"Total Pushups: " stringByAppendingString:[self.group.totalPushups stringValue]];
 }
