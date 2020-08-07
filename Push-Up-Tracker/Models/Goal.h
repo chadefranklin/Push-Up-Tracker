@@ -15,9 +15,14 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (nonatomic, strong) NSNumber *pushupTarget;
 @property (nonatomic, strong) NSNumber *pushupAmount;
+@property (nonatomic, strong) NSDate *deadline;
 @property (nonatomic, strong) NSDate *createdAt;
 @property (nonatomic, strong) Group *group;
 @property (nonatomic, strong) PFUser *creator;
+
++ (Goal *) createGoal: ( NSNumber * _Nullable )pushupTarget withDeadline:( NSDate * _Nullable )deadline withCompletion: (PFBooleanResultBlock  _Nullable)completion;
+
++ (Goal *) createGoalForGroup:( Group * _Nullable )group withPushupTarget:( NSNumber * _Nullable )pushupTarget withDeadline:( NSDate * _Nullable )deadline withCompletion: (PFBooleanResultBlock  _Nullable)completion;
 
 @end
 
