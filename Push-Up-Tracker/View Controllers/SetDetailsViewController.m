@@ -89,13 +89,10 @@
         }
     }];
     
-    PFQuery *likedQuery = [PFQuery queryWithClassName:@"Set"];
-    NSArray<NSString *> *keys = @[@"liked"];
-    [likedQuery selectKeys:keys];
-    [likedQuery whereKey:@"objectId" equalTo:self.set.objectId];
-    [likedQuery whereKey:@"liked" equalTo:[PFUser currentUser]];
-    
-    // fetch data asynchronously
+    PFRelation *likedRelation = [self.set relationForKey:@"liked"];
+    PFQuery *likedQuery = [likedRelation query];
+    [likedQuery whereKey:@"objectId" equalTo:[PFUser currentUser].objectId];
+
     [likedQuery findObjectsInBackgroundWithBlock:^(NSArray<Set *> * _Nullable sets, NSError * _Nullable error) {
         if (sets && sets.count > 0) {
             // do something with the data fetched
