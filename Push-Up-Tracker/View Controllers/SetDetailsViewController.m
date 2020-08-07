@@ -19,6 +19,10 @@
 @property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
 @property (weak, nonatomic) IBOutlet UILabel *pushupAmountLabel;
 
+@property (weak, nonatomic) IBOutlet UIButton *likeButton;
+
+@property (weak, nonatomic) IBOutlet GMSMapView *mapView;
+
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
 
 @property (nonatomic) AVPlayer *aVPlayer;
@@ -38,9 +42,13 @@
     self.usernameLabel.text = self.set.creator.username;
     self.imagePreviewImageView.file = self.set[@"image"];
     [self.imagePreviewImageView loadInBackground];
+    self.profileImageView.file = self.set.creator[@"profileImage"];
+    [self.profileImageView loadInBackground];
     
     self.timestampLabel.text = [self.set.createdAt timeAgoSinceNow];
     
+    self.mapView.myLocationEnabled = YES;
+    self.mapView.settings.myLocationButton = YES;
     
     PFQuery *query = [PFQuery queryWithClassName:@"Set"];
     [query getObjectInBackgroundWithId:self.set.objectId block:^(PFObject *set, NSError *error) {
@@ -67,6 +75,15 @@
             [self.set.video.getData writeToURL:outputURL atomically:YES];
             
             self.aVPlayer = [AVPlayer playerWithURL:outputURL];
+            
+            if(self.set.latitude && self.set.longitude){
+                CLLocationCoordinate2D position = CLLocationCoordinate2DMake([self.set.latitude floatValue], [self.set.longitude floatValue]);
+                GMSMarker *marker = [GMSMarker markerWithPosition:position];
+                marker.title = @"Set Location";
+                marker.map = self.mapView;
+                
+                [self.mapView animateToLocation:position];
+            }
         } else {
             // Failure!
         }

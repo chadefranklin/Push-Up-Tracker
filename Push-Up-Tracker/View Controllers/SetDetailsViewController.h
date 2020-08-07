@@ -13,6 +13,7 @@
 #import <CoreMedia/CoreMedia.h>
 #import <AVFoundation/AVFoundation.h>
 #import <AVKit/AVKit.h>
+@import GoogleMaps;
 
 // Can delete if not storing videos to the photo library.  Delete the assetslibrary framework too requires this)
 #import <AssetsLibrary/AssetsLibrary.h>
