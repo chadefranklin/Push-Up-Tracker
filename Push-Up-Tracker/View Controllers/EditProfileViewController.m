@@ -1,72 +1,88 @@
 //
-//  ProfileViewController.m
+//  EditProfileViewController.m
 //  Push-Up-Tracker
 //
-//  Created by chadfranklin on 7/16/20.
+//  Created by chadfranklin on 8/6/20.
 //  Copyright © 2020 chadfranklin. All rights reserved.
 //
 
-#import "ProfileViewController.h"
-#import "SceneDelegate.h"
-#import "LoginViewController.h"
-#import "CEFPFFileObjectHelper.h"
-#import "ProfileCompletedSetsViewController.h"
-#import "RankingSystem.h"
+#import "EditProfileViewController.h"
 #import <Parse/Parse.h>
+#import "CEFPFFileObjectHelper.h"
+#import "MBProgressHUD.h"
 
-@interface ProfileViewController ()
-@property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
-@property (weak, nonatomic) IBOutlet UILabel *rankLabel;
-@property (weak, nonatomic) IBOutlet PFImageView *profileImageView;
-@property (weak, nonatomic) IBOutlet UILabel *maxPushupsLabel;
-@property (weak, nonatomic) IBOutlet UILabel *totalPushupsLabel;
+@interface EditProfileViewController ()
+
+@property (weak, nonatomic) IBOutlet PFImageView *profilePictureImageView;
+@property (weak, nonatomic) IBOutlet UITextField *usernameField;
+@property (weak, nonatomic) IBOutlet UITextField *updatedPasswordField;
+
+@property (weak, nonatomic) IBOutlet UIBarButtonItem *updateButton;
+
+@property (nonatomic) BOOL profilePictureChanged;
 
 @end
 
-@implementation ProfileViewController
+@implementation EditProfileViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.usernameLabel.text = [PFUser currentUser].username;
-    self.profileImageView.file = PFUser.currentUser[@"profileImage"];
-    [self.profileImageView loadInBackground];
-}
-
-- (void)viewWillAppear:(BOOL)animated{
-    [super viewWillAppear:animated];
+    self.updateButton.enabled = NO;
     
-    self.totalPushupsLabel.text = [@"Total Pushups: " stringByAppendingString:[PFUser.currentUser[@"totalPushups"] stringValue]];
-    self.maxPushupsLabel.text = [@"Max Pushups: " stringByAppendingString:[PFUser.currentUser[@"maxPushups"] stringValue]];
-    self.rankLabel.text = [RankingSystem getRankForMaxPushups:PFUser.currentUser[@"maxPushups"]];
+    self.usernameField.text = [PFUser currentUser].username;
+    self.profilePictureImageView.file = [PFUser currentUser][@"profileImage"];
+    [self.profilePictureImageView loadInBackground];
 }
 
-- (IBAction)onLogOutPressed:(id)sender {
-    NSLog(@"onLogOutPressed");
-    [PFUser logOutInBackgroundWithBlock:^(NSError * _Nullable error) {
-        SceneDelegate *sceneDelegate = (SceneDelegate *)[UIApplication sharedApplication].connectedScenes.allObjects.firstObject.delegate;
+- (IBAction)onProfilePictureImageViewTapped:(id)sender {
+    // choose image
+    [self profilePictureImageAlert];
+}
+
+- (IBAction)onBackdropTapped:(id)sender {
+    [self.view endEditing:YES];
+}
+
+- (IBAction)onFieldEdited:(id)sender {
+    if(self.usernameField.text.length > 0 && (![self.usernameField.text isEqualToString:[PFUser currentUser].username] || self.profilePictureChanged || self.updatedPasswordField.text.length > 0)) {
+        self.updateButton.enabled = YES;
+    } else {
+        self.updateButton.enabled = NO;
+    }
+}
+
+- (IBAction)onUpdatePressed:(id)sender {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
+    if(![self.usernameField.text isEqualToString:[PFUser currentUser].username]){
+        [PFUser currentUser].username = self.usernameField.text;
+    }
+    if(self.updatedPasswordField.text.length > 0){
+        [PFUser currentUser].password = self.updatedPasswordField.text;
+    }
+    if(self.profilePictureChanged){
+        [PFUser currentUser][@"profileImage"] = [CEFPFFileObjectHelper getPFFileFromImage:[self resizeImage:self.profilePictureImageView.image withSize:CGSizeMake(100, 100)]];
+    }
+    
+    [[PFUser currentUser] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
+        if(succeeded){
+            NSLog(@"successfully updated user");
+        
+            [self.delegate didEditUser];
             
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        LoginViewController *loginViewController = [storyboard instantiateViewControllerWithIdentifier:@"LoginViewController"];
-        sceneDelegate.window.rootViewController = loginViewController;
+            [self.navigationController popViewControllerAnimated:YES];
+        } else {
+            NSLog(@"failed to update user");
+            NSLog(error.description);
+        }
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
 }
 
-- (IBAction)onProfileImagePressed:(id)sender {
-    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
-        // ask whether to use camera or photo library
-        [self profilePictureImageAlert];
-    }
-    else {
-        NSLog(@"Camera 🚫 available so we will use photo library instead");
-        //[self pickImage:NO];
-        [self profilePictureImageAlert];
-    }
-}
-
 - (void)profilePictureImageAlert{
-    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Choose A Profile Image"
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Choose A Profile Picture"
            message:@"Please choose a photo location"
     preferredStyle:(UIAlertControllerStyleActionSheet)];
     
@@ -127,16 +143,15 @@
     //UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
     UIImage *editedImage = info[UIImagePickerControllerEditedImage];
 
+    self.profilePictureImageView.image = editedImage;
+    
     // Do something with the images (based on your use case)
     // Dismiss UIImagePickerController to go back to your original view controller
     [self dismissViewControllerAnimated:YES completion:^{
-        PFUser.currentUser[@"profileImage"] = [CEFPFFileObjectHelper getPFFileFromImage:[self resizeImage:editedImage withSize:CGSizeMake(100, 100)]];
-        [PFUser.currentUser saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-            if (!error) {
-              self.profileImageView.file = PFUser.currentUser[@"profileImage"];
-              [self.profileImageView loadInBackground];
-            }
-        }];
+        self.profilePictureChanged = YES;
+        if(self.usernameField.text.length > 0){
+            self.updateButton.enabled = YES;
+        }
     }];
 }
 
@@ -161,30 +176,14 @@
 }
 
 
-
+/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
-    
-    if([segue.identifier isEqualToString:@"toProfileCompletedSetsSegue"]){
-        ProfileCompletedSetsViewController *profileCompletedSetsViewController = (ProfileCompletedSetsViewController*)[segue destinationViewController];
-        profileCompletedSetsViewController.user = [PFUser currentUser];
-    } else if ([segue.identifier isEqualToString:@"toEditProfileSegue"]) {
-        EditProfileViewController *editProfileViewController = (EditProfileViewController*)[segue destinationViewController];
-        editProfileViewController.delegate = self;
-    }
 }
-
-- (void)didEditUser{
-    NSLog(@"didEditUser");
-    
-    self.usernameLabel.text = [PFUser currentUser].username;
-    self.profileImageView.file = PFUser.currentUser[@"profileImage"];
-    [self.profileImageView loadInBackground];
-}
-
+*/
 
 @end

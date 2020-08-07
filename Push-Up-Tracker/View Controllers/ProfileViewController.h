@@ -7,11 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "EditProfileViewController.h"
 @import Parse;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ProfileViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+@interface ProfileViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate, EditProfileViewControllerDelegate>
 
 @end
 
