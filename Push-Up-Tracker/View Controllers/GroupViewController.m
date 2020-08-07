@@ -8,8 +8,8 @@
 
 #import "GroupViewController.h"
 #import <Parse/Parse.h>
-#import "EditGroupViewController.h"
 #import "GroupCompletedSetsViewController.h"
+#import "GroupGoalsViewController.h"
 
 @interface GroupViewController ()
 
@@ -56,11 +56,24 @@
     
     if ([segue.identifier isEqualToString:@"toEditGroupSegue"]) {
         EditGroupViewController *editGroupViewController = (EditGroupViewController*)[segue destinationViewController];
+        editGroupViewController.delegate = self;
         editGroupViewController.group = self.group;
     } else if([segue.identifier isEqualToString:@"toGroupCompletedSetsSegue"]){
         GroupCompletedSetsViewController *groupCompletedSetsViewController = (GroupCompletedSetsViewController*)[segue destinationViewController];
         groupCompletedSetsViewController.group = self.group;
+    } else if([segue.identifier isEqualToString:@"toGroupGoalsSegue"]){
+        GroupGoalsViewController *groupGoalsViewController = (GroupGoalsViewController*)[segue destinationViewController];
+        groupGoalsViewController.group = self.group;
     }
+}
+
+- (void)didEditGroup:(Group *)group{
+    NSLog(@"new group name:");
+    NSLog(group.name);
+    
+    self.groupNameLabel.text = group.name;
+    self.groupPictureImageView.file = group[@"image"];
+    [self.groupPictureImageView loadInBackground];
 }
 
 

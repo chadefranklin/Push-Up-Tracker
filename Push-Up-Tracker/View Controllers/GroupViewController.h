@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 #import "Group.h"
+#import "EditGroupViewController.h"
 @import Parse;
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface GroupViewController : UIViewController
+@interface GroupViewController : UIViewController <EditGroupViewControllerDelegate>
 
 @property (strong, nonatomic) Group *group;
 
