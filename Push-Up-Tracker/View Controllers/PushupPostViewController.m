@@ -18,7 +18,12 @@
 
 @property (nonatomic) AVPlayer *aVPlayer;
 
+@property (nonatomic) CLLocationManager *locationManager;
+
 @property (nonatomic) BOOL waitingForPostResponse;
+
+@property (nonatomic, nullable) NSNumber *latitude;
+@property (nonatomic, nullable) NSNumber *longitude;
 
 @end
 
@@ -29,7 +34,15 @@
     // Do any additional setup after loading the view.
     
     self.pushupCountLabel.text = [self.pushupCount stringValue];
-//    [self generateImagePreview];
+    
+    [self.locationManager requestWhenInUseAuthorization];
+    
+    self.locationManager = [[CLLocationManager alloc] init];
+    self.locationManager.delegate = self;
+    self.locationManager.distanceFilter = kCLDistanceFilterNone;
+    self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    ////[self.locationManager requestLocation];
+    [self.locationManager startUpdatingLocation];
 }
 
 - (void)viewDidAppear:(BOOL)animated{
@@ -84,7 +97,7 @@
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 
-    [Set createSet:self.pushupCount withVideoURL:outputURL withImage:self.previewImage.image withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+    [Set createSet:self.pushupCount withVideoURL:outputURL withImage:self.previewImage.image withLatitude:self.latitude withLongitude:self.longitude withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if(succeeded){
             NSLog(@"successfully posted set");
             //[self dismissViewControllerAnimated: YES completion: nil];
@@ -97,6 +110,22 @@
         [MBProgressHUD hideHUDForView:self.view animated:YES];
         self.waitingForPostResponse = NO;
     }];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
+    NSLog(@"OldLocation %f %f", oldLocation.coordinate.latitude, oldLocation.coordinate.longitude);
+    NSLog(@"NewLocation %f %f", newLocation.coordinate.latitude, newLocation.coordinate.longitude);
+    
+    self.latitude = [NSNumber numberWithFloat:newLocation.coordinate.latitude];
+    self.longitude = [NSNumber numberWithFloat:newLocation.coordinate.longitude];
+    
+    [self.locationManager stopUpdatingLocation];
+    self.locationManager.delegate = nil;
+    self.locationManager = nil;
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error{
+    NSLog(error.description);
 }
 
 
