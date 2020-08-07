@@ -12,7 +12,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol EditGroupViewControllerDelegate
+
+- (void)didEditGroup:(Group *)group;
+
+@end
+
 @interface EditGroupViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+
+@property (nonatomic, weak) id<EditGroupViewControllerDelegate> delegate;
 
 @property (strong, nonatomic) Group *group;
 

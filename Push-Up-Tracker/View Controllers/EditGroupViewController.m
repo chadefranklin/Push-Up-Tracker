@@ -8,6 +8,7 @@
 
 #import "EditGroupViewController.h"
 #import "CEFPFFileObjectHelper.h"
+#import "MBProgressHUD.h"
 
 @interface EditGroupViewController ()
 
@@ -35,6 +36,8 @@
 }
 
 - (IBAction)onUpdatePressed:(id)sender {
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
+    
     if(![self.joinCodeField.text isEqualToString:self.group.code]){
         PFQuery *groupQuery = [Group query];
         NSArray<NSString *> *keys = @[@"code"];
@@ -58,12 +61,15 @@
                         self.group.name = self.groupNameField.text;
                     }
                     if(self.groupPictureChanged){
-                        self.group.image = [CEFPFFileObjectHelper getPFFileFromImage:self.groupPictureImageView.image];
+                        self.group.image = [CEFPFFileObjectHelper getPFFileFromImage:[self resizeImage:self.groupPictureImageView.image withSize:CGSizeMake(100, 100)]];
                     }
                     
                     [self.group saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                         if(succeeded){
                             NSLog(@"successfully updated ");
+                        
+                            [self.delegate didEditGroup:self.group];
+                            
                             [self.navigationController popViewControllerAnimated:YES];
                         } else {
                             NSLog(@"fail");
@@ -76,6 +82,7 @@
                 // handle error
                 NSLog(@"error checking groups' codes");
             }
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
         }];
     } else {
         // save group with new metadata
@@ -83,18 +90,21 @@
             self.group.name = self.groupNameField.text;
         }
         if(self.groupPictureChanged){
-            self.group.image = [CEFPFFileObjectHelper getPFFileFromImage:self.groupPictureImageView.image];
+            self.group.image = [CEFPFFileObjectHelper getPFFileFromImage:[self resizeImage:self.groupPictureImageView.image withSize:CGSizeMake(100, 100)]];
         }
         
         [self.group saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
             if(succeeded){
                 NSLog(@"successfully updated ");
+                
+                [self.delegate didEditGroup:self.group];
+                
                 [self.navigationController popViewControllerAnimated:YES];
-                // delegate to refresh group in GroupViewController
             } else {
                 NSLog(@"fail");
                 NSLog(error.description);
             }
+            [MBProgressHUD hideHUDForView:self.view animated:YES];
         }];
     }
 }
