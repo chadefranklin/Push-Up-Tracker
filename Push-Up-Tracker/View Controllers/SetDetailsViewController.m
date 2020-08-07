@@ -22,6 +22,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *playButton;
 
 @property (nonatomic) AVPlayer *aVPlayer;
+
+@property (nonatomic) BOOL liked;
+
 @end
 
 @implementation SetDetailsViewController
@@ -68,7 +71,27 @@
             // Failure!
         }
     }];
-     
+    
+    PFQuery *likedQuery = [PFQuery queryWithClassName:@"Set"];
+    NSArray<NSString *> *keys = @[@"liked"];
+    [likedQuery selectKeys:keys];
+    [likedQuery whereKey:@"objectId" equalTo:self.set.objectId];
+    [likedQuery whereKey:@"liked" equalTo:[PFUser currentUser]];
+    
+    // fetch data asynchronously
+    [likedQuery findObjectsInBackgroundWithBlock:^(NSArray<Set *> * _Nullable sets, NSError * _Nullable error) {
+        if (sets && sets.count > 0) {
+            // do something with the data fetched
+            NSLog(@"liked is equal");
+            self.liked = YES;
+        }
+        else {
+            // handle error
+            NSLog(@"liked not equal");
+            self.liked = NO;
+        }
+        [self updateLikes];
+    }];
 }
 
 - (IBAction)onPlayPressed:(id)sender {
@@ -77,6 +100,54 @@
     [self presentViewController:controller animated:YES completion:nil];
     controller.player = self.aVPlayer;
     [self.aVPlayer play];
+}
+
+- (IBAction)onLikePressed:(id)sender {
+    if(self.liked){
+        [self.set incrementKey:@"likes" byAmount:@(-1)];
+        PFRelation *relation = [self.set relationForKey:@"liked"];
+        [relation removeObject:[PFUser currentUser]];
+        
+        self.liked = NO;
+    } else {
+        [self.set incrementKey:@"likes"];
+        PFRelation *relation = [self.set relationForKey:@"liked"];
+        [relation addObject:[PFUser currentUser]];
+        
+        self.liked = YES;
+    }
+    [self.set saveInBackground];
+    
+    [self updateLikes];
+}
+
+- (IBAction)onImageDoubleTapped:(id)sender {
+    NSLog(@"double tapped");
+    if(!self.liked){
+        [self.set incrementKey:@"likes"];
+        PFRelation *relation = [self.set relationForKey:@"liked"];
+        [relation addObject:[PFUser currentUser]];
+        
+        self.liked = YES;
+        
+        [self.set saveInBackground];
+        
+        [self updateLikes];
+    }
+}
+
+
+- (void)updateLikes{
+    if(self.liked){
+        [self.likeButton setTitle:[self.set.likes stringValue] forState:UIControlStateSelected];
+    } else {
+        [self.likeButton setTitle:[self.set.likes stringValue] forState:UIControlStateNormal];
+    }
+    self.likeButton.selected = self.liked;
+}
+
+- (void)likeAnimation{
+    
 }
 
 
