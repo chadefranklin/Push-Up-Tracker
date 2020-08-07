@@ -22,6 +22,16 @@
 		B493ED8124D9861E0055C9D0 /* Joey-Up.wav in Resources */ = {isa = PBXBuildFile; fileRef = B493ED7D24D9861E0055C9D0 /* Joey-Up.wav */; };
 		B493ED8224D9861E0055C9D0 /* Salli-Down.wav in Resources */ = {isa = PBXBuildFile; fileRef = B493ED7E24D9861E0055C9D0 /* Salli-Down.wav */; };
 		B493ED8324D9861E0055C9D0 /* Salli-Up.wav in Resources */ = {isa = PBXBuildFile; fileRef = B493ED7F24D9861E0055C9D0 /* Salli-Up.wav */; };
+		B493ED8624DA059A0055C9D0 /* GroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B493ED8524DA059A0055C9D0 /* GroupViewController.m */; };
+		B493ED8924DA05C30055C9D0 /* EditGroupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B493ED8824DA05C30055C9D0 /* EditGroupViewController.m */; };
+		B493ED8C24DAB79C0055C9D0 /* GroupCompletedSetsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B493ED8B24DAB79C0055C9D0 /* GroupCompletedSetsViewController.m */; };
+		B493ED8F24DACACF0055C9D0 /* OtherProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B493ED8E24DACACF0055C9D0 /* OtherProfileViewController.m */; };
+		B493ED9224DAD5730055C9D0 /* RankingSystem.m in Sources */ = {isa = PBXBuildFile; fileRef = B493ED9124DAD5730055C9D0 /* RankingSystem.m */; };
+		B493ED9524DADED10055C9D0 /* ProfileGoalsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B493ED9424DADED10055C9D0 /* ProfileGoalsViewController.m */; };
+		B493ED9B24DB1FCB0055C9D0 /* GoalCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B493ED9A24DB1FCB0055C9D0 /* GoalCell.m */; };
+		B493ED9E24DC86B00055C9D0 /* GroupGoalsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B493ED9D24DC86B00055C9D0 /* GroupGoalsViewController.m */; };
+		B493EDA124DC9B280055C9D0 /* AddGoalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B493EDA024DC9B280055C9D0 /* AddGoalViewController.m */; };
+		B493EDA424DCACB00055C9D0 /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B493EDA324DCACB00055C9D0 /* EditProfileViewController.m */; };
 		B4EEA2A424C0C9DE00C05571 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EEA2A324C0C9DE00C05571 /* LoginViewController.m */; };
 		B4EEA2A724C0D36F00C05571 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EEA2A624C0D36F00C05571 /* ProfileViewController.m */; };
 		B4EEA2AA24C9E13300C05571 /* PushupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EEA2A924C9E13300C05571 /* PushupViewController.m */; };
@@ -87,6 +97,26 @@
 		B493ED7D24D9861E0055C9D0 /* Joey-Up.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Joey-Up.wav"; sourceTree = "<group>"; };
 		B493ED7E24D9861E0055C9D0 /* Salli-Down.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Salli-Down.wav"; sourceTree = "<group>"; };
 		B493ED7F24D9861E0055C9D0 /* Salli-Up.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = "Salli-Up.wav"; sourceTree = "<group>"; };
+		B493ED8424DA059A0055C9D0 /* GroupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GroupViewController.h; sourceTree = "<group>"; };
+		B493ED8524DA059A0055C9D0 /* GroupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GroupViewController.m; sourceTree = "<group>"; };
+		B493ED8724DA05C30055C9D0 /* EditGroupViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditGroupViewController.h; sourceTree = "<group>"; };
+		B493ED8824DA05C30055C9D0 /* EditGroupViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditGroupViewController.m; sourceTree = "<group>"; };
+		B493ED8A24DAB79C0055C9D0 /* GroupCompletedSetsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GroupCompletedSetsViewController.h; sourceTree = "<group>"; };
+		B493ED8B24DAB79C0055C9D0 /* GroupCompletedSetsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GroupCompletedSetsViewController.m; sourceTree = "<group>"; };
+		B493ED8D24DACACF0055C9D0 /* OtherProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OtherProfileViewController.h; sourceTree = "<group>"; };
+		B493ED8E24DACACF0055C9D0 /* OtherProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = OtherProfileViewController.m; sourceTree = "<group>"; };
+		B493ED9024DAD5730055C9D0 /* RankingSystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = RankingSystem.h; sourceTree = "<group>"; };
+		B493ED9124DAD5730055C9D0 /* RankingSystem.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RankingSystem.m; sourceTree = "<group>"; };
+		B493ED9324DADED10055C9D0 /* ProfileGoalsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileGoalsViewController.h; sourceTree = "<group>"; };
+		B493ED9424DADED10055C9D0 /* ProfileGoalsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ProfileGoalsViewController.m; sourceTree = "<group>"; };
+		B493ED9924DB1FCB0055C9D0 /* GoalCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GoalCell.h; sourceTree = "<group>"; };
+		B493ED9A24DB1FCB0055C9D0 /* GoalCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GoalCell.m; sourceTree = "<group>"; };
+		B493ED9C24DC86B00055C9D0 /* GroupGoalsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GroupGoalsViewController.h; sourceTree = "<group>"; };
+		B493ED9D24DC86B00055C9D0 /* GroupGoalsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GroupGoalsViewController.m; sourceTree = "<group>"; };
+		B493ED9F24DC9B280055C9D0 /* AddGoalViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddGoalViewController.h; sourceTree = "<group>"; };
+		B493EDA024DC9B280055C9D0 /* AddGoalViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddGoalViewController.m; sourceTree = "<group>"; };
+		B493EDA224DCACB00055C9D0 /* EditProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditProfileViewController.h; sourceTree = "<group>"; };
+		B493EDA324DCACB00055C9D0 /* EditProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditProfileViewController.m; sourceTree = "<group>"; };
 		B4EEA2A224C0C9DE00C05571 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		B4EEA2A324C0C9DE00C05571 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		B4EEA2A524C0D36F00C05571 /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
@@ -272,6 +302,22 @@
 				B4EEA2C524D3602600C05571 /* SetDetailsViewController.m */,
 				B4EEA2CD24D828B600C05571 /* PushupPostViewController.h */,
 				B4EEA2CE24D828B600C05571 /* PushupPostViewController.m */,
+				B493ED8424DA059A0055C9D0 /* GroupViewController.h */,
+				B493ED8524DA059A0055C9D0 /* GroupViewController.m */,
+				B493ED8724DA05C30055C9D0 /* EditGroupViewController.h */,
+				B493ED8824DA05C30055C9D0 /* EditGroupViewController.m */,
+				B493ED8A24DAB79C0055C9D0 /* GroupCompletedSetsViewController.h */,
+				B493ED8B24DAB79C0055C9D0 /* GroupCompletedSetsViewController.m */,
+				B493ED8D24DACACF0055C9D0 /* OtherProfileViewController.h */,
+				B493ED8E24DACACF0055C9D0 /* OtherProfileViewController.m */,
+				B493ED9324DADED10055C9D0 /* ProfileGoalsViewController.h */,
+				B493ED9424DADED10055C9D0 /* ProfileGoalsViewController.m */,
+				B493ED9C24DC86B00055C9D0 /* GroupGoalsViewController.h */,
+				B493ED9D24DC86B00055C9D0 /* GroupGoalsViewController.m */,
+				B493ED9F24DC9B280055C9D0 /* AddGoalViewController.h */,
+				B493EDA024DC9B280055C9D0 /* AddGoalViewController.m */,
+				B493EDA224DCACB00055C9D0 /* EditProfileViewController.h */,
+				B493EDA324DCACB00055C9D0 /* EditProfileViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -289,6 +335,8 @@
 				B4EEA2CB24D800E400C05571 /* CEFPFFileObjectHelper.m */,
 				B4EEA2D024D8AA2900C05571 /* CEFFileHelper.h */,
 				B4EEA2D124D8AA2900C05571 /* CEFFileHelper.m */,
+				B493ED9024DAD5730055C9D0 /* RankingSystem.h */,
+				B493ED9124DAD5730055C9D0 /* RankingSystem.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -300,6 +348,8 @@
 				B4EEA2B524CB5F2C00C05571 /* GroupCell.m */,
 				B4EEA2BE24D0CEB300C05571 /* SetCell.h */,
 				B4EEA2BF24D0CEB300C05571 /* SetCell.m */,
+				B493ED9924DB1FCB0055C9D0 /* GoalCell.h */,
+				B493ED9A24DB1FCB0055C9D0 /* GoalCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -316,6 +366,7 @@
 				B428652F24BF65E600F03109 /* Frameworks */,
 				B428653024BF65E600F03109 /* Resources */,
 				9005CC83C1C02EB9C113B0D5 /* [CP] Embed Pods Frameworks */,
+				3B40D81320EB689266FF62D7 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -354,6 +405,7 @@
 				B428655524BF65E800F03109 /* Frameworks */,
 				B428655624BF65E800F03109 /* Resources */,
 				FFAB6A6BA9B1C7767B9D4B45 /* [CP] Embed Pods Frameworks */,
+				922DE679C257AE86E4180D64 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -461,6 +513,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		3B40D81320EB689266FF62D7 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Push-Up-Tracker/Pods-Push-Up-Tracker-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Push-Up-Tracker/Pods-Push-Up-Tracker-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Push-Up-Tracker/Pods-Push-Up-Tracker-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		9005CC83C1C02EB9C113B0D5 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -476,6 +545,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Push-Up-Tracker/Pods-Push-Up-Tracker-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		922DE679C257AE86E4180D64 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Push-Up-Tracker-Push-Up-TrackerUITests/Pods-Push-Up-Tracker-Push-Up-TrackerUITests-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Push-Up-Tracker-Push-Up-TrackerUITests/Pods-Push-Up-Tracker-Push-Up-TrackerUITests-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Push-Up-Tracker-Push-Up-TrackerUITests/Pods-Push-Up-Tracker-Push-Up-TrackerUITests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		9D664A3D706EB17E15DEF617 /* [CP] Check Pods Manifest.lock */ = {
@@ -546,24 +632,34 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B493ED9524DADED10055C9D0 /* ProfileGoalsViewController.m in Sources */,
 				B4EEA2AD24C9FE3600C05571 /* AddGroupViewController.m in Sources */,
+				B493EDA424DCACB00055C9D0 /* EditProfileViewController.m in Sources */,
 				B4EEA2C024D0CEB300C05571 /* SetCell.m in Sources */,
 				B4EEA2C324D0CECC00C05571 /* Set.m in Sources */,
+				B493EDA124DC9B280055C9D0 /* AddGoalViewController.m in Sources */,
 				B428653D24BF65E600F03109 /* ViewController.m in Sources */,
 				B4EEA2C924D4C6ED00C05571 /* Goal.m in Sources */,
 				B428653724BF65E600F03109 /* AppDelegate.m in Sources */,
 				B428654824BF65E800F03109 /* main.m in Sources */,
 				B4EEA2D224D8AA2900C05571 /* CEFFileHelper.m in Sources */,
+				B493ED8624DA059A0055C9D0 /* GroupViewController.m in Sources */,
 				B4EEA2B624CB5F2C00C05571 /* GroupCell.m in Sources */,
+				B493ED8924DA05C30055C9D0 /* EditGroupViewController.m in Sources */,
+				B493ED8C24DAB79C0055C9D0 /* GroupCompletedSetsViewController.m in Sources */,
 				B4EEA2B024CA008600C05571 /* GroupsViewController.m in Sources */,
+				B493ED9B24DB1FCB0055C9D0 /* GoalCell.m in Sources */,
 				B4EEA2CF24D828B600C05571 /* PushupPostViewController.m in Sources */,
 				B428653A24BF65E600F03109 /* SceneDelegate.m in Sources */,
 				B4EEA2AA24C9E13300C05571 /* PushupViewController.m in Sources */,
+				B493ED9E24DC86B00055C9D0 /* GroupGoalsViewController.m in Sources */,
 				B4EEA2CC24D800E400C05571 /* CEFPFFileObjectHelper.m in Sources */,
+				B493ED9224DAD5730055C9D0 /* RankingSystem.m in Sources */,
 				B4EEA2B324CA102100C05571 /* Group.m in Sources */,
 				B4EEA2A724C0D36F00C05571 /* ProfileViewController.m in Sources */,
 				B4EEA2A424C0C9DE00C05571 /* LoginViewController.m in Sources */,
 				B4EEA2C624D3602600C05571 /* SetDetailsViewController.m in Sources */,
+				B493ED8F24DACACF0055C9D0 /* OtherProfileViewController.m in Sources */,
 				B4EEA2B924D09DD500C05571 /* ProfileCompletedSetsViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
