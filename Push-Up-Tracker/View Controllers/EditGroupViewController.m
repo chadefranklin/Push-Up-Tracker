@@ -65,7 +65,6 @@
                         if(succeeded){
                             NSLog(@"successfully updated ");
                             [self.navigationController popViewControllerAnimated:YES];
-                            // delegate to refresh group in GroupViewController
                         } else {
                             NSLog(@"fail");
                             NSLog(error.description);
@@ -101,14 +100,11 @@
 }
 
 - (IBAction)onGroupPictureImageViewTapped:(id)sender {
-    NSLog(@"pic tapped");
     // choose image
     [self groupImageAlert];
 }
 
 - (IBAction)onBackdropTapped:(id)sender {
-    NSLog(@"back tapped");
-    
     [self.view endEditing:YES];
 }
 

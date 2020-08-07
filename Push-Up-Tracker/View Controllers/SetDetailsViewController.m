@@ -37,7 +37,6 @@
     [self.imagePreviewImageView loadInBackground];
     
     self.timestampLabel.text = [self.set.createdAt timeAgoSinceNow];
-     
     
     
     PFQuery *query = [PFQuery queryWithClassName:@"Set"];
@@ -48,8 +47,6 @@
             
             // enable play button
             self.playButton.enabled = YES;
-            
-            
             
             NSString *outputPath = [[NSString alloc] initWithFormat:@"%@%@", NSTemporaryDirectory(), @"save.mov"];
             NSURL *outputURL = [[NSURL alloc] initFileURLWithPath:outputPath];
@@ -75,8 +72,6 @@
 }
 
 - (IBAction)onPlayPressed:(id)sender {
-    
-
     // create a player view controller
     AVPlayerViewController *controller = [[AVPlayerViewController alloc] init];
     [self presentViewController:controller animated:YES completion:nil];
