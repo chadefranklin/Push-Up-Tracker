@@ -14,6 +14,9 @@ target 'Push-Up-Tracker' do
   pod 'MBProgressHUD', '~> 1.2.0'
   pod "LinearProgressBar"
 
+  pod 'GoogleMaps'
+  pod 'GooglePlaces'
+
   target 'Push-Up-TrackerTests' do
     inherit! :search_paths
     # Pods for testing
