@@ -9,6 +9,7 @@
 #import "Set.h"
 #import "Group.h"
 #import "CEFPFFileObjectHelper.h"
+#import "Goal.h"
 
 @implementation Set
 
@@ -18,26 +19,62 @@
 @dynamic pushupAmount;
 @dynamic createdAt;
 @dynamic objectId;
+@dynamic latitude;
+@dynamic longitude;
+@dynamic likes;
 
 + (nonnull NSString *)parseClassName {
     return @"Set";
 }
 
 //TODO: create set, have a NSARRAY of Groups to add relations to
-+ (void) createSet: ( NSNumber * _Nullable )pushupAmount withVideoURL: ( NSURL * _Nullable )videoURL withImage: ( UIImage * _Nullable )image withCompletion: (PFBooleanResultBlock  _Nullable)completion {
++ (void) createSet: ( NSNumber * _Nullable )pushupAmount withVideoURL: ( NSURL * _Nullable )videoURL withImage: ( UIImage * _Nullable )image withLatitude:( NSNumber * _Nullable )latitude withLongitude:( NSNumber * _Nullable )longitude withCompletion: (PFBooleanResultBlock  _Nullable)completion {
     
     // ask about this
     [PFUser.currentUser incrementKey:@"totalPushups" byAmount:pushupAmount];
-    if(pushupAmount > PFUser.currentUser[@"maxPushups"]){
+    if([pushupAmount intValue] > [PFUser.currentUser[@"maxPushups"] intValue]){
         PFUser.currentUser[@"maxPushups"] = pushupAmount;
     }
-    [PFUser.currentUser saveInBackground];
+    [PFUser.currentUser saveInBackground]; //
+    
+    
+    
+    PFRelation *relation = [[PFUser currentUser] relationForKey:@"goals"];
+
+        // generate a query based on that relation
+        PFQuery *goalQuery = [relation query];
+        [goalQuery orderByDescending:@"createdAt"];
+    //    NSArray<NSString *> *keys = @[@"image", @"pushupAmount", @"createdAt", @"objectId", @"creator", @"creator.username", @"creator.profileImage", @"creator.maxPushups", @"creator.totalPushups"];
+    //    [setQuery selectKeys:keys];
+        [goalQuery whereKey:@"deadline" greaterThan:[NSDate now]];
+
+        // now execute the query
+        // fetch data asynchronously
+        [goalQuery findObjectsInBackgroundWithBlock:^(NSArray<Goal *> * _Nullable goals, NSError * _Nullable error) {
+            if (goals) {
+                // do something with the data fetched
+                for(int i = 0; i < goals.count; i++){
+                    [goals[i] incrementKey:@"pushupAmount" byAmount:pushupAmount];
+                }
+                [PFObject saveAllInBackground:goals];
+            }
+            else {
+                // handle error
+            }
+        }];
+    
+    
     
     Set *newSet = [Set new];
     newSet.pushupAmount = pushupAmount;
     newSet.creator = [PFUser currentUser];
     newSet.image = [CEFPFFileObjectHelper getPFFileFromImage:image];
     newSet.video = [CEFPFFileObjectHelper getPFFileFromVideoFileURL:videoURL];
+    newSet.likes = @(0);
+    if(latitude && longitude){
+        newSet.latitude = latitude;
+        newSet.longitude = longitude;
+    }
     
     // get groups that I am a member of and add my set to it via relation
     // construct PFQuery
