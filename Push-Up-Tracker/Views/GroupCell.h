@@ -16,10 +16,16 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property (weak, nonatomic) IBOutlet PFImageView *groupImageView;
 @property (weak, nonatomic) IBOutlet UILabel *groupNameLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *exclamationMarkImageView;
+@property (weak, nonatomic) IBOutlet UILabel *goalsActiveLabel;
+@property (weak, nonatomic) IBOutlet UILabel *totalPushupsLabel;
 
 @property (strong, nonatomic) Group *group;
 
 - (void)setGroup:(Group *)group;
+- (void)setInJeopardy;
+- (void)setGoalsActive:(NSNumber *)goalsActive;
+
 @end
 
 NS_ASSUME_NONNULL_END

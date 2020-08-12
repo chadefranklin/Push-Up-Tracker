@@ -7,6 +7,7 @@
 //
 
 #import "GroupCell.h"
+#import "Goal.h"
 
 @implementation GroupCell
 
@@ -16,6 +17,8 @@
     
     self.groupImageView.layer.masksToBounds = YES;
     self.groupImageView.layer.cornerRadius = self.groupImageView.bounds.size.width / 2;
+    
+    self.exclamationMarkImageView.alpha = 0;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
@@ -30,6 +33,16 @@
     [self.groupImageView loadInBackground];
     
     self.groupNameLabel.text = group.name;
+    self.totalPushupsLabel.text = [@"Total Pushups: " stringByAppendingString:[group.totalPushups stringValue]];
+}
+
+- (void)setInJeopardy{
+    self.exclamationMarkImageView.alpha = 1;
+}
+
+- (void)setGoalsActive:(NSNumber *)goalsActive{
+    NSLog(@"set goals active");
+    self.goalsActiveLabel.text = [@"Goals active: " stringByAppendingString:[goalsActive stringValue]];
 }
 
 @end

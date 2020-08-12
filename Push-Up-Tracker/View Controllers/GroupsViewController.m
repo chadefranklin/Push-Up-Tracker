@@ -11,12 +11,16 @@
 #import "Group.h"
 #import "GroupCell.h"
 #import "GroupViewController.h"
+#import "Goal.h"
+#import "CEFGoalHelper.h"
 
 @interface GroupsViewController ()
 
 @property (weak, nonatomic) IBOutlet UITableView *groupsTableView;
 
 @property (nonatomic, strong) NSArray *groups;
+@property (nonatomic, strong) NSMutableArray *groupsInJeopardy;
+@property (nonatomic, strong) NSMutableArray *groupsActiveGoals;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
 
 @end
@@ -30,17 +34,19 @@
     self.groupsTableView.dataSource = self;
     self.groupsTableView.delegate = self;
     
+    [self fetchGroups];
+    
     self.refreshControl = [[UIRefreshControl alloc] init];
     [self.refreshControl addTarget:self action:@selector(fetchGroups) forControlEvents:UIControlEventValueChanged];
     //[self.moviesTableView addSubview:self.refreshControl];
     [self.groupsTableView insertSubview:self.refreshControl atIndex:0];
 }
 
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
-    [self fetchGroups];
-}
+//- (void)viewWillAppear:(BOOL)animated{
+//    [super viewWillAppear:animated];
+//
+//    [self fetchGroups];
+//}
 
 
 
@@ -57,8 +63,17 @@
     [groupQuery findObjectsInBackgroundWithBlock:^(NSArray<Group *> * _Nullable groups, NSError * _Nullable error) {
         if (groups) {
             // do something with the data fetched
+            self.groupsInJeopardy = [NSMutableArray arrayWithCapacity:groups.count];
+            self.groupsActiveGoals = [NSMutableArray arrayWithCapacity:groups.count];
+            for (int i = 0; i < groups.count; i++) {
+                [self.groupsInJeopardy addObject:@(NO)];
+                [self.groupsActiveGoals addObject:@(0)];
+            }
+            
             self.groups = groups;
             [self.groupsTableView reloadData];
+            
+            [self checkGoalsInJeopardyAndActiveGoals];
         }
         else {
             // handle error
@@ -66,6 +81,44 @@
         
         [self.refreshControl endRefreshing];
     }];
+}
+
+- (void)checkGoalsInJeopardyAndActiveGoals{
+    for(int i = 0; i < self.groups.count; i++){
+        PFRelation *goalsRelation = [self.groups[i] relationForKey:@"goals"];
+        PFQuery *goalsQuery = [goalsRelation query];
+        [goalsQuery orderByDescending:@"createdAt"];
+        [goalsQuery whereKey:@"deadline" greaterThan:[NSDate now]];
+
+        [goalsQuery findObjectsInBackgroundWithBlock:^(NSArray<Goal *> * _Nullable goals, NSError * _Nullable error) {
+            if (goals) {
+                // do something with the data fetched
+                NSLog(@"goals count: ");
+                NSLog(@"%d", goals.count);
+                [self.groupsActiveGoals replaceObjectAtIndex:i withObject:@(goals.count)];
+                
+                BOOL inJeopardy = NO;
+                for(int j = 0; j < goals.count; j++){
+                    //if([self checkIfGoalInJeopardy:goals[j]]){
+                    if([CEFGoalHelper checkIfGoalInJeopardy:goals[j]]){
+                        inJeopardy = YES;
+                        break;
+                    }
+                }
+                if(inJeopardy){
+                    [self.groupsInJeopardy replaceObjectAtIndex:i withObject:@(YES)];
+                } else {
+                    [self.groupsInJeopardy replaceObjectAtIndex:i withObject:@(NO)];
+                }
+            }
+            else {
+                // handle error
+                [self.groupsInJeopardy replaceObjectAtIndex:i withObject:@(NO)];
+            }
+            
+            [self.groupsTableView reloadData];
+        }];
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
@@ -78,6 +131,13 @@
     PFObject *group = self.groups[indexPath.row];
     
     [cell setGroup:group];
+    
+    if(self.groupsInJeopardy && self.groupsInJeopardy[indexPath.row] && [[self.groupsInJeopardy objectAtIndex:indexPath.row] boolValue] == YES){
+        [cell setInJeopardy];
+    }
+    if(self.groupsActiveGoals && self.groupsActiveGoals[indexPath.row]){
+        [cell setGoalsActive:self.groupsActiveGoals[indexPath.row]];
+    }
         
     return cell;
 }
