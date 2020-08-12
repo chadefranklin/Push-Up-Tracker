@@ -8,6 +8,7 @@
 
 #import "GoalCell.h"
 #import "DateTools.h"
+#import "CEFDateHelper.h"
 
 @implementation GoalCell
 
@@ -35,11 +36,13 @@
             
             [self checkIfInJeopardy];
         } else {
-            self.deadlineLabel.text = @"Time Expired";
+            //self.deadlineLabel.text = @"Time Expired";
+            self.deadlineLabel.text = [@"Expired: " stringByAppendingString:[CEFDateHelper.sharedObject formatDate:goal.deadline withDateFormat:@"MM/dd/yyyy HH:mm"]];
             self.goalProgressBar.barColor = [UIColor systemRedColor];
         }
     }
-    self.goalProgressLabel.text = [[[goal.pushupAmount stringValue] stringByAppendingString:@" / "] stringByAppendingString:[goal.pushupTarget stringValue]];
+    //self.goalProgressLabel.text = [[[goal.pushupAmount stringValue] stringByAppendingString:@" / "] stringByAppendingString:[goal.pushupTarget stringValue]];
+    self.goalProgressLabel.text = [[[[goal.pushupAmount stringValue] stringByAppendingString:@" of "] stringByAppendingString:[goal.pushupTarget stringValue]] stringByAppendingString:@" Pushups Completed"];
     self.goalProgressBar.progressValue = ([goal.pushupAmount floatValue] / [goal.pushupTarget floatValue]) * 100;
 }
 
@@ -98,6 +101,8 @@
         } else {
             self.goalProgressBar.barColor = [UIColor systemGreenColor];
         }
+    } else {
+        self.goalProgressBar.barColor = [UIColor systemGreenColor];
     }
 }
 
