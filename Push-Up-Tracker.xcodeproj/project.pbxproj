@@ -9,6 +9,11 @@
 /* Begin PBXBuildFile section */
 		4BB8C0DD943208269A217DDE /* Pods_Push_Up_Tracker_Push_Up_TrackerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7AEF4E853F943A0099A0F88 /* Pods_Push_Up_Tracker_Push_Up_TrackerUITests.framework */; };
 		85453C16FDAA40F48CE20373 /* Pods_Push_Up_TrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C141369CA5ABA69B0FF4902B /* Pods_Push_Up_TrackerTests.framework */; };
+		B412CC3B24E363FB00AF9165 /* PushupSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B412CC3A24E363FB00AF9165 /* PushupSettingsViewController.m */; };
+		B412CC3E24E3ED4800AF9165 /* CEFDefaultHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B412CC3D24E3ED4800AF9165 /* CEFDefaultHelper.m */; };
+		B412CC4124E40C8500AF9165 /* GroupMembersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B412CC4024E40C8500AF9165 /* GroupMembersViewController.m */; };
+		B412CC4424E40C9F00AF9165 /* GroupMemberCell.m in Sources */ = {isa = PBXBuildFile; fileRef = B412CC4324E40C9F00AF9165 /* GroupMemberCell.m */; };
+		B412CC4724E421A500AF9165 /* CEFDateHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B412CC4624E421A500AF9165 /* CEFDateHelper.m */; };
 		B428653724BF65E600F03109 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B428653624BF65E600F03109 /* AppDelegate.m */; };
 		B428653A24BF65E600F03109 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = B428653924BF65E600F03109 /* SceneDelegate.m */; };
 		B428653D24BF65E600F03109 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B428653C24BF65E600F03109 /* ViewController.m */; };
@@ -32,6 +37,7 @@
 		B493ED9E24DC86B00055C9D0 /* GroupGoalsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B493ED9D24DC86B00055C9D0 /* GroupGoalsViewController.m */; };
 		B493EDA124DC9B280055C9D0 /* AddGoalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B493EDA024DC9B280055C9D0 /* AddGoalViewController.m */; };
 		B493EDA424DCACB00055C9D0 /* EditProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B493EDA324DCACB00055C9D0 /* EditProfileViewController.m */; };
+		B493EDAA24E30FF30055C9D0 /* CEFGoalHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = B493EDA924E30FF30055C9D0 /* CEFGoalHelper.m */; };
 		B4EEA2A424C0C9DE00C05571 /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EEA2A324C0C9DE00C05571 /* LoginViewController.m */; };
 		B4EEA2A724C0D36F00C05571 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EEA2A624C0D36F00C05571 /* ProfileViewController.m */; };
 		B4EEA2AA24C9E13300C05571 /* PushupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B4EEA2A924C9E13300C05571 /* PushupViewController.m */; };
@@ -75,7 +81,19 @@
 		45D0A63E4F4A8347880C09ED /* Pods-Push-Up-Tracker-Push-Up-TrackerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Push-Up-Tracker-Push-Up-TrackerUITests.debug.xcconfig"; path = "Target Support Files/Pods-Push-Up-Tracker-Push-Up-TrackerUITests/Pods-Push-Up-Tracker-Push-Up-TrackerUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		8173676FBFDACE90D23156C3 /* Pods-Push-Up-Tracker-Push-Up-TrackerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Push-Up-Tracker-Push-Up-TrackerUITests.release.xcconfig"; path = "Target Support Files/Pods-Push-Up-Tracker-Push-Up-TrackerUITests/Pods-Push-Up-Tracker-Push-Up-TrackerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		A92AF6D82077891DBDC906CF /* Pods-Push-Up-Tracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Push-Up-Tracker.debug.xcconfig"; path = "Target Support Files/Pods-Push-Up-Tracker/Pods-Push-Up-Tracker.debug.xcconfig"; sourceTree = "<group>"; };
-		B428653224BF65E600F03109 /* Push-Up-Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Push-Up-Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B412CC3924E363FB00AF9165 /* PushupSettingsViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PushupSettingsViewController.h; sourceTree = "<group>"; };
+		B412CC3A24E363FB00AF9165 /* PushupSettingsViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = PushupSettingsViewController.m; sourceTree = "<group>"; };
+		B412CC3C24E3ED4800AF9165 /* CEFDefaultHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CEFDefaultHelper.h; sourceTree = "<group>"; };
+		B412CC3D24E3ED4800AF9165 /* CEFDefaultHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CEFDefaultHelper.m; sourceTree = "<group>"; };
+		B412CC3F24E40C8500AF9165 /* GroupMembersViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GroupMembersViewController.h; sourceTree = "<group>"; };
+		B412CC4024E40C8500AF9165 /* GroupMembersViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GroupMembersViewController.m; sourceTree = "<group>"; };
+		B412CC4224E40C9F00AF9165 /* GroupMemberCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GroupMemberCell.h; sourceTree = "<group>"; };
+		B412CC4324E40C9F00AF9165 /* GroupMemberCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GroupMemberCell.m; sourceTree = "<group>"; };
+		B412CC4524E421A500AF9165 /* CEFDateHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CEFDateHelper.h; sourceTree = "<group>"; };
+		B412CC4624E421A500AF9165 /* CEFDateHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CEFDateHelper.m; sourceTree = "<group>"; };
+		B412CC4824E42F7D00AF9165 /* Keys.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Keys.h; sourceTree = "<group>"; };
+		B412CC4B24E4302600AF9165 /* KeysSAMPLE.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeysSAMPLE.h; sourceTree = "<group>"; };
+		B428653224BF65E600F03109 /* Push-up Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Push-up Tracker.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B428653524BF65E600F03109 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		B428653624BF65E600F03109 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		B428653824BF65E600F03109 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
@@ -117,6 +135,8 @@
 		B493EDA024DC9B280055C9D0 /* AddGoalViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddGoalViewController.m; sourceTree = "<group>"; };
 		B493EDA224DCACB00055C9D0 /* EditProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = EditProfileViewController.h; sourceTree = "<group>"; };
 		B493EDA324DCACB00055C9D0 /* EditProfileViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = EditProfileViewController.m; sourceTree = "<group>"; };
+		B493EDA824E30FF30055C9D0 /* CEFGoalHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CEFGoalHelper.h; sourceTree = "<group>"; };
+		B493EDA924E30FF30055C9D0 /* CEFGoalHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CEFGoalHelper.m; sourceTree = "<group>"; };
 		B4EEA2A224C0C9DE00C05571 /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		B4EEA2A324C0C9DE00C05571 /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		B4EEA2A524C0D36F00C05571 /* ProfileViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
@@ -225,7 +245,7 @@
 		B428653324BF65E600F03109 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				B428653224BF65E600F03109 /* Push-Up-Tracker.app */,
+				B428653224BF65E600F03109 /* Push-up Tracker.app */,
 				B428654D24BF65E800F03109 /* Push-Up-TrackerTests.xctest */,
 				B428655824BF65E800F03109 /* Push-Up-TrackerUITests.xctest */,
 			);
@@ -250,6 +270,8 @@
 				B428654324BF65E800F03109 /* LaunchScreen.storyboard */,
 				B428654624BF65E800F03109 /* Info.plist */,
 				B428654724BF65E800F03109 /* main.m */,
+				B412CC4824E42F7D00AF9165 /* Keys.h */,
+				B412CC4B24E4302600AF9165 /* KeysSAMPLE.h */,
 			);
 			path = "Push-Up-Tracker";
 			sourceTree = "<group>";
@@ -318,6 +340,10 @@
 				B493EDA024DC9B280055C9D0 /* AddGoalViewController.m */,
 				B493EDA224DCACB00055C9D0 /* EditProfileViewController.h */,
 				B493EDA324DCACB00055C9D0 /* EditProfileViewController.m */,
+				B412CC3924E363FB00AF9165 /* PushupSettingsViewController.h */,
+				B412CC3A24E363FB00AF9165 /* PushupSettingsViewController.m */,
+				B412CC3F24E40C8500AF9165 /* GroupMembersViewController.h */,
+				B412CC4024E40C8500AF9165 /* GroupMembersViewController.m */,
 			);
 			path = "View Controllers";
 			sourceTree = "<group>";
@@ -337,6 +363,12 @@
 				B4EEA2D124D8AA2900C05571 /* CEFFileHelper.m */,
 				B493ED9024DAD5730055C9D0 /* RankingSystem.h */,
 				B493ED9124DAD5730055C9D0 /* RankingSystem.m */,
+				B493EDA824E30FF30055C9D0 /* CEFGoalHelper.h */,
+				B493EDA924E30FF30055C9D0 /* CEFGoalHelper.m */,
+				B412CC3C24E3ED4800AF9165 /* CEFDefaultHelper.h */,
+				B412CC3D24E3ED4800AF9165 /* CEFDefaultHelper.m */,
+				B412CC4524E421A500AF9165 /* CEFDateHelper.h */,
+				B412CC4624E421A500AF9165 /* CEFDateHelper.m */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -350,6 +382,8 @@
 				B4EEA2BF24D0CEB300C05571 /* SetCell.m */,
 				B493ED9924DB1FCB0055C9D0 /* GoalCell.h */,
 				B493ED9A24DB1FCB0055C9D0 /* GoalCell.m */,
+				B412CC4224E40C9F00AF9165 /* GroupMemberCell.h */,
+				B412CC4324E40C9F00AF9165 /* GroupMemberCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -374,7 +408,7 @@
 			);
 			name = "Push-Up-Tracker";
 			productName = "Push-Up-Tracker";
-			productReference = B428653224BF65E600F03109 /* Push-Up-Tracker.app */;
+			productReference = B428653224BF65E600F03109 /* Push-up Tracker.app */;
 			productType = "com.apple.product-type.application";
 		};
 		B428654C24BF65E800F03109 /* Push-Up-TrackerTests */ = {
@@ -632,21 +666,27 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B412CC3E24E3ED4800AF9165 /* CEFDefaultHelper.m in Sources */,
 				B493ED9524DADED10055C9D0 /* ProfileGoalsViewController.m in Sources */,
 				B4EEA2AD24C9FE3600C05571 /* AddGroupViewController.m in Sources */,
+				B412CC4424E40C9F00AF9165 /* GroupMemberCell.m in Sources */,
 				B493EDA424DCACB00055C9D0 /* EditProfileViewController.m in Sources */,
 				B4EEA2C024D0CEB300C05571 /* SetCell.m in Sources */,
 				B4EEA2C324D0CECC00C05571 /* Set.m in Sources */,
+				B412CC4724E421A500AF9165 /* CEFDateHelper.m in Sources */,
 				B493EDA124DC9B280055C9D0 /* AddGoalViewController.m in Sources */,
 				B428653D24BF65E600F03109 /* ViewController.m in Sources */,
 				B4EEA2C924D4C6ED00C05571 /* Goal.m in Sources */,
+				B412CC3B24E363FB00AF9165 /* PushupSettingsViewController.m in Sources */,
 				B428653724BF65E600F03109 /* AppDelegate.m in Sources */,
 				B428654824BF65E800F03109 /* main.m in Sources */,
 				B4EEA2D224D8AA2900C05571 /* CEFFileHelper.m in Sources */,
 				B493ED8624DA059A0055C9D0 /* GroupViewController.m in Sources */,
+				B412CC4124E40C8500AF9165 /* GroupMembersViewController.m in Sources */,
 				B4EEA2B624CB5F2C00C05571 /* GroupCell.m in Sources */,
 				B493ED8924DA05C30055C9D0 /* EditGroupViewController.m in Sources */,
 				B493ED8C24DAB79C0055C9D0 /* GroupCompletedSetsViewController.m in Sources */,
+				B493EDAA24E30FF30055C9D0 /* CEFGoalHelper.m in Sources */,
 				B4EEA2B024CA008600C05571 /* GroupsViewController.m in Sources */,
 				B493ED9B24DB1FCB0055C9D0 /* GoalCell.m in Sources */,
 				B4EEA2CF24D828B600C05571 /* PushupPostViewController.m in Sources */,
@@ -838,7 +878,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.chadellisfranklin.Push-Up-Tracker";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Push-up Tracker";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -856,7 +896,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.chadellisfranklin.Push-Up-Tracker";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Push-up Tracker";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

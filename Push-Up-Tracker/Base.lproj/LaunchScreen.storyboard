@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="16097.2" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -11,9 +12,29 @@
             <objects>
                 <viewController id="01J-lp-oVM" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" xcode11CocoaTouchSystemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cool-background-gradient-r" translatesAutoresizingMaskIntoConstraints="NO" id="LmB-0A-Oka">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Push-up Tracker" translatesAutoresizingMaskIntoConstraints="NO" id="4A5-7g-VEz">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="4A5-7g-VEz" firstAttribute="bottom" secondItem="LmB-0A-Oka" secondAttribute="bottom" id="0RV-wY-UXV"/>
+                            <constraint firstAttribute="trailing" secondItem="LmB-0A-Oka" secondAttribute="trailing" id="36x-l6-b3w"/>
+                            <constraint firstItem="4A5-7g-VEz" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="IMh-OF-13u"/>
+                            <constraint firstAttribute="bottom" secondItem="LmB-0A-Oka" secondAttribute="bottom" id="QPB-wh-9MY"/>
+                            <constraint firstItem="4A5-7g-VEz" firstAttribute="leading" secondItem="LmB-0A-Oka" secondAttribute="leading" id="Sbb-Wo-m5m"/>
+                            <constraint firstItem="4A5-7g-VEz" firstAttribute="trailing" secondItem="LmB-0A-Oka" secondAttribute="trailing" id="WpD-fe-3wa"/>
+                            <constraint firstItem="4A5-7g-VEz" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="dV6-z7-sbP"/>
+                            <constraint firstItem="4A5-7g-VEz" firstAttribute="top" secondItem="LmB-0A-Oka" secondAttribute="top" id="lEK-TU-daJ"/>
+                            <constraint firstItem="LmB-0A-Oka" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="q0a-V5-gNI"/>
+                            <constraint firstItem="LmB-0A-Oka" firstAttribute="leading" secondItem="Ze5-6b-2t3" secondAttribute="leading" id="qm1-2p-5zk"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                 </viewController>
@@ -22,4 +43,8 @@
             <point key="canvasLocation" x="53" y="375"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Push-up Tracker" width="1250" height="197"/>
+        <image name="cool-background-gradient-r" width="1080" height="1920"/>
+    </resources>
 </document>
