@@ -51,6 +51,8 @@
                 [groups[0] saveInBackgroundWithBlock:^(BOOL succeeded, NSError * _Nullable error) {
                     if(succeeded){
                         NSLog(@"successfully joined group");
+                        [self.delegate didAddGroup];
+                        
                         [self.navigationController popViewControllerAnimated:YES];
                     } else {
                         NSLog(@"failed to join group");
