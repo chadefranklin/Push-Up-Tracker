@@ -43,6 +43,7 @@
         NSArray<NSString *> *keys = @[@"code"];
         [groupQuery selectKeys:keys];
         [groupQuery whereKey:@"code" equalTo:self.joinCodeField.text];
+        groupQuery.limit = 1;
         
         // fetch data asynchronously (check again if group code exists already because it's possible someone made a group while we were choosing image)
         [groupQuery findObjectsInBackgroundWithBlock:^(NSArray<Group *> * _Nullable groups, NSError * _Nullable error) {
