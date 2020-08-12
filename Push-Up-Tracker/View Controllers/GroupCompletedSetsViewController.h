@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface GroupCompletedSetsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface GroupCompletedSetsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
 
 @property (strong, nonatomic) Group *group;
 
