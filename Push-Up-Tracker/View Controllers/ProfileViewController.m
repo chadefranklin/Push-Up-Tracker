@@ -13,6 +13,7 @@
 #import "ProfileCompletedSetsViewController.h"
 #import "RankingSystem.h"
 #import <Parse/Parse.h>
+#import "CEFGoalHelper.h"
 
 @interface ProfileViewController ()
 @property (weak, nonatomic) IBOutlet UILabel *usernameLabel;
@@ -20,6 +21,7 @@
 @property (weak, nonatomic) IBOutlet PFImageView *profileImageView;
 @property (weak, nonatomic) IBOutlet UILabel *maxPushupsLabel;
 @property (weak, nonatomic) IBOutlet UILabel *totalPushupsLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *goalsExclamationImageView;
 
 @end
 
@@ -35,6 +37,8 @@
     self.usernameLabel.text = [PFUser currentUser].username;
     self.profileImageView.file = PFUser.currentUser[@"profileImage"];
     [self.profileImageView loadInBackground];
+    
+    self.goalsExclamationImageView.alpha = 0;
 }
 
 - (void)viewWillAppear:(BOOL)animated{
@@ -43,6 +47,37 @@
     self.totalPushupsLabel.text = [@"Total Pushups: " stringByAppendingString:[PFUser.currentUser[@"totalPushups"] stringValue]];
     self.maxPushupsLabel.text = [@"Max Pushups: " stringByAppendingString:[PFUser.currentUser[@"maxPushups"] stringValue]];
     self.rankLabel.text = [RankingSystem getRankForMaxPushups:PFUser.currentUser[@"maxPushups"]];
+    
+    [self checkGoalsInJeopardy];
+}
+
+- (void)checkGoalsInJeopardy{
+    PFRelation *goalsRelation = [[PFUser currentUser] relationForKey:@"goals"];
+    PFQuery *goalsQuery = [goalsRelation query];
+    [goalsQuery orderByDescending:@"createdAt"];
+    [goalsQuery whereKey:@"deadline" greaterThan:[NSDate now]];
+
+    [goalsQuery findObjectsInBackgroundWithBlock:^(NSArray<Goal *> * _Nullable goals, NSError * _Nullable error) {
+        if (goals) {
+            // do something with the data fetched
+            BOOL inJeopardy = NO;
+            for(int i = 0; i < goals.count; i++){
+                if([CEFGoalHelper checkIfGoalInJeopardy:goals[i]]){
+                    inJeopardy = YES;
+                    break;
+                }
+            }
+            if(inJeopardy){
+                self.goalsExclamationImageView.alpha = 1;
+            } else {
+                self.goalsExclamationImageView.alpha = 0;
+            }
+        }
+        else {
+            // handle error
+            self.goalsExclamationImageView.alpha = 0;
+        }
+    }];
 }
 
 - (IBAction)onLogOutPressed:(id)sender {
