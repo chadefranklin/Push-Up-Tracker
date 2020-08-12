@@ -19,6 +19,9 @@
 @property (weak, nonatomic) IBOutlet UILabel *timestampLabel;
 @property (weak, nonatomic) IBOutlet UILabel *pushupAmountLabel;
 
+@property (weak, nonatomic) IBOutlet UIImageView *likeImageView;
+
+
 @property (weak, nonatomic) IBOutlet UIButton *likeButton;
 
 @property (weak, nonatomic) IBOutlet GMSMapView *mapView;
@@ -95,9 +98,10 @@
     PFRelation *likedRelation = [self.set relationForKey:@"liked"];
     PFQuery *likedQuery = [likedRelation query];
     [likedQuery whereKey:@"objectId" equalTo:[PFUser currentUser].objectId];
+    likedQuery.limit = 1;
 
-    [likedQuery findObjectsInBackgroundWithBlock:^(NSArray<Set *> * _Nullable sets, NSError * _Nullable error) {
-        if (sets && sets.count > 0) {
+    [likedQuery findObjectsInBackgroundWithBlock:^(NSArray<PFUser *> * _Nullable users, NSError * _Nullable error) {
+        if (users && users.count > 0) {
             // do something with the data fetched
             NSLog(@"liked is equal");
             self.liked = YES;
@@ -109,6 +113,12 @@
         }
         [self updateLikes];
     }];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    self.likeImageView.alpha = 0;
 }
 
 - (IBAction)onPlayPressed:(id)sender {
@@ -150,6 +160,8 @@
         [self.set saveInBackground];
         
         [self updateLikes];
+        
+        [self likeAnimation];
     }
 }
 
@@ -164,7 +176,22 @@
 }
 
 - (void)likeAnimation{
+    //likeImageView
+    //__block CGRect zeroLikeFrame = self.likeImageView.frame;
+    __block CGRect newLikeFrame = self.likeImageView.frame;
     
+    newLikeFrame.size.width = 0;
+    newLikeFrame.size.height = 0;
+    self.likeImageView.frame = newLikeFrame;
+    self.likeImageView.alpha = 1;
+    
+    newLikeFrame.size.width = 200;
+    newLikeFrame.size.height = 200;
+    [UIView animateWithDuration:0.8f animations:^{
+        self.likeImageView.frame = newLikeFrame;
+    }completion:^(BOOL finished){
+        self.likeImageView.alpha = 0;
+    }];
 }
 
 
