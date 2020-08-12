@@ -41,12 +41,7 @@
     self.locationManager.delegate = self;
     self.locationManager.distanceFilter = kCLDistanceFilterNone;
     self.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    ////[self.locationManager requestLocation];
     [self.locationManager startUpdatingLocation];
-}
-
-- (void)viewDidAppear:(BOOL)animated{
-    [super viewDidAppear:animated];
     
     [self generateImagePreview];
 }
@@ -97,7 +92,7 @@
     
     [MBProgressHUD showHUDAddedTo:self.view animated:YES];
 
-    [Set createSet:self.pushupCount withVideoURL:outputURL withImage:self.previewImage.image withLatitude:self.latitude withLongitude:self.longitude withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
+    [Set createSet:self.pushupCount withVideoURL:outputURL withImage:[self resizeImage:self.previewImage.image withSize:CGSizeMake(400, 400)] withLatitude:self.latitude withLongitude:self.longitude withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
         if(succeeded){
             NSLog(@"successfully posted set");
             //[self dismissViewControllerAnimated: YES completion: nil];
@@ -111,6 +106,93 @@
         self.waitingForPostResponse = NO;
     }];
 }
+
+- (IBAction)onPreviewImageButtonPressed:(id)sender {
+    [self previewImageAlert];
+}
+
+- (void)previewImageAlert{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Change Preview Image"
+           message:@"Please choose a photo location"
+    preferredStyle:(UIAlertControllerStyleActionSheet)];
+    
+    
+    // create a cancel action
+    UIAlertAction *cancelAction = [UIAlertAction actionWithTitle:@"Cancel"
+                                                        style:UIAlertActionStyleCancel
+                                                      handler:^(UIAlertAction * _Nonnull action) {
+                                                             // handle cancel response here. Doing nothing will dismiss the view.
+                                                      }];
+    // add the cancel action to the alertController
+    [alert addAction:cancelAction];
+
+    if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+        // create an OK action
+        UIAlertAction *cameraAction = [UIAlertAction actionWithTitle:@"Camera"
+                                                           style:UIAlertActionStyleDefault
+                                                         handler:^(UIAlertAction * _Nonnull action) {
+                                                                 [self pickImage:YES];
+                                                         }];
+        // add the OK action to the alert controller
+        [alert addAction:cameraAction];
+    }
+    
+    [self presentViewController:alert animated:YES completion:^{
+        // optional code for what happens after the alert controller has finished presenting
+        NSLog(@"alert controller finished presenting");
+    }];
+}
+
+- (void)pickImage:(BOOL)camera{
+    UIImagePickerController *imagePickerVC = [UIImagePickerController new];
+    imagePickerVC.delegate = self;
+    imagePickerVC.allowsEditing = YES;
+    
+    if (camera) {
+        imagePickerVC.sourceType = UIImagePickerControllerSourceTypeCamera;
+    }
+    else {
+        imagePickerVC.sourceType = UIImagePickerControllerSourceTypePhotoLibrary;
+    }
+
+    [self presentViewController:imagePickerVC animated:YES completion:nil];
+}
+
+- (void)imagePickerController:(UIImagePickerController *)picker didFinishPickingMediaWithInfo:(NSDictionary<NSString *,id> *)info {
+    NSLog(@"imagePickerController");
+    // Get the image captured by the UIImagePickerController
+    //UIImage *originalImage = info[UIImagePickerControllerOriginalImage];
+    UIImage *editedImage = info[UIImagePickerControllerEditedImage];
+
+    self.previewImage.image = editedImage;
+    
+    // Do something with the images (based on your use case)
+    // Dismiss UIImagePickerController to go back to your original view controller
+    [self dismissViewControllerAnimated:YES completion:^{
+        
+    }];
+}
+
+- (void)imagePickerControllerDidCancel:(UIImagePickerController *)picker{
+    NSLog(@"cancel");
+    [self dismissViewControllerAnimated:YES completion:nil];
+    //[self.presentingViewController dismissViewControllerAnimated:true completion:nil];
+}
+
+- (UIImage *)resizeImage:(UIImage *)image withSize:(CGSize)size {
+    UIImageView *resizeImageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+    
+    resizeImageView.contentMode = UIViewContentModeScaleAspectFill;
+    resizeImageView.image = image;
+    
+    UIGraphicsBeginImageContext(size);
+    [resizeImageView.layer renderInContext:UIGraphicsGetCurrentContext()];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    
+    return newImage;
+}
+
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateToLocation:(CLLocation *)newLocation fromLocation:(CLLocation *)oldLocation {
     NSLog(@"OldLocation %f %f", oldLocation.coordinate.latitude, oldLocation.coordinate.longitude);
