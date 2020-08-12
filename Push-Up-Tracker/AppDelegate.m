@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import <Parse/Parse.h>
+#import "Keys.h"
 
 @interface AppDelegate ()
 
@@ -25,6 +26,8 @@
     }];
     
     [Parse initializeWithConfiguration:config];
+    
+    [GMSServices provideAPIKey:GMS_API_KEY];
     
     return YES;
 }
