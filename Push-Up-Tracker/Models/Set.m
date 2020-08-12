@@ -40,28 +40,25 @@
     
     
     PFRelation *relation = [[PFUser currentUser] relationForKey:@"goals"];
+    // generate a query based on that relation
+    PFQuery *goalQuery = [relation query];
+    [goalQuery orderByDescending:@"createdAt"];
+    [goalQuery whereKey:@"deadline" greaterThan:[NSDate now]];
 
-        // generate a query based on that relation
-        PFQuery *goalQuery = [relation query];
-        [goalQuery orderByDescending:@"createdAt"];
-    //    NSArray<NSString *> *keys = @[@"image", @"pushupAmount", @"createdAt", @"objectId", @"creator", @"creator.username", @"creator.profileImage", @"creator.maxPushups", @"creator.totalPushups"];
-    //    [setQuery selectKeys:keys];
-        [goalQuery whereKey:@"deadline" greaterThan:[NSDate now]];
-
-        // now execute the query
-        // fetch data asynchronously
-        [goalQuery findObjectsInBackgroundWithBlock:^(NSArray<Goal *> * _Nullable goals, NSError * _Nullable error) {
-            if (goals) {
-                // do something with the data fetched
-                for(int i = 0; i < goals.count; i++){
-                    [goals[i] incrementKey:@"pushupAmount" byAmount:pushupAmount];
-                }
-                [PFObject saveAllInBackground:goals];
+    // now execute the query
+    // fetch data asynchronously
+    [goalQuery findObjectsInBackgroundWithBlock:^(NSArray<Goal *> * _Nullable goals, NSError * _Nullable error) {
+        if (goals) {
+            // do something with the data fetched
+            for(int i = 0; i < goals.count; i++){
+                [goals[i] incrementKey:@"pushupAmount" byAmount:pushupAmount];
             }
-            else {
-                // handle error
-            }
-        }];
+            [PFObject saveAllInBackground:goals];
+        }
+        else {
+            // handle error
+        }
+    }];
     
     
     
@@ -93,7 +90,28 @@
                     PFRelation *relation = [groups[i] relationForKey:@"sets"];
                     [relation addObject:newSet];
                     [groups[i] incrementKey:@"totalPushups" byAmount:pushupAmount];
-                    // increment pushupAmount on the current goal
+                    
+                    // increment pushupAmount on any current goals
+                    PFRelation *groupGoalsRelation = [groups[i] relationForKey:@"goals"];
+                    // generate a query based on that relation
+                    PFQuery *groupGoalQuery = [groupGoalsRelation query];
+                    [groupGoalQuery orderByDescending:@"createdAt"];
+                    [groupGoalQuery whereKey:@"deadline" greaterThan:[NSDate now]];
+
+                    // now execute the query
+                    // fetch data asynchronously
+                    [groupGoalQuery findObjectsInBackgroundWithBlock:^(NSArray<Goal *> * _Nullable goals, NSError * _Nullable error) {
+                        if (goals) {
+                            // do something with the data fetched
+                            for(int i = 0; i < goals.count; i++){
+                                [goals[i] incrementKey:@"pushupAmount" byAmount:pushupAmount];
+                            }
+                            [PFObject saveAllInBackground:goals];
+                        }
+                        else {
+                            // handle error
+                        }
+                    }];
                     
                     //[groups[i] saveInBackground];
                 }
