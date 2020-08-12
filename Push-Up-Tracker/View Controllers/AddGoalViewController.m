@@ -49,9 +49,37 @@
     [self.view endEditing:YES];
 }
 
+- (IBAction)onDatePickerValueChanged:(id)sender {
+    [self.view endEditing:YES];
+}
+
+
 - (IBAction)onAddPressed:(id)sender {
-    [self.delegate didAddGoal:[NSNumber numberWithInteger:[self.pushupAmountField.text integerValue]] withDeadline:self.deadlineDatePicker.date];
+    if([self.deadlineDatePicker.date timeIntervalSinceDate:[NSDate now]] > 0){
+        [self.delegate didAddGoal:[NSNumber numberWithInteger:[self.pushupAmountField.text integerValue]] withDeadline:self.deadlineDatePicker.date];
+    } else {
+        [self chooseFutureDateAlert];
+    }
     [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (void)chooseFutureDateAlert{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Incorrect Date"
+           message:@"Please choose a time in the future."
+    preferredStyle:(UIAlertControllerStyleAlert)];
+    
+    // create an OK action
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * _Nonnull action) {
+                                                             // handle response here.
+                                                     }];
+    // add the OK action to the alert controller
+    [alert addAction:okAction];
+    
+    [self presentViewController:alert animated:YES completion:^{
+        // optional code for what happens after the alert controller has finished presenting
+    }];
 }
 
 /*
