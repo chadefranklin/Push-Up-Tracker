@@ -46,6 +46,7 @@
     self.playButton.enabled = NO;
     
     self.usernameLabel.text = self.set.creator.username;
+    self.pushupAmountLabel.text = [[self.set.pushupAmount stringValue] stringByAppendingString:@" Pushups"];
     self.imagePreviewImageView.file = self.set[@"image"];
     [self.imagePreviewImageView loadInBackground];
     self.profileImageView.file = self.set.creator[@"profileImage"];
