@@ -97,7 +97,14 @@
         
         GroupViewController *groupViewController = (GroupViewController*)[segue destinationViewController];
         groupViewController.group = group;
+    } else if ([segue.identifier isEqualToString:@"toAddGroupSegue"]) {
+        AddGroupViewController *addGroupViewController = (AddGroupViewController*)[segue destinationViewController];
+        addGroupViewController.delegate = self;
     }
+}
+
+- (void)didAddGroup{
+    [self fetchGroups];
 }
 
 

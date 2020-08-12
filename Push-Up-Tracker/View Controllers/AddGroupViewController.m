@@ -9,6 +9,7 @@
 #import "AddGroupViewController.h"
 #import <Parse/Parse.h>
 #import "Group.h"
+#import "MBProgressHUD.h"
 
 @interface AddGroupViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *joinJoinCodeField;
@@ -36,6 +37,7 @@
     [groupQuery selectKeys:keys];
     [groupQuery whereKey:@"code" equalTo:self.joinJoinCodeField.text];
     
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     // fetch data asynchronously
     [groupQuery findObjectsInBackgroundWithBlock:^(NSArray<Group *> * _Nullable groups, NSError * _Nullable error) {
         if (groups) {
@@ -64,6 +66,8 @@
             // handle error
             NSLog(@"error checking groups' codes");
         }
+        
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
 }
 
@@ -72,8 +76,9 @@
     NSArray<NSString *> *keys = @[@"code"];
     [groupQuery selectKeys:keys];
     [groupQuery whereKey:@"code" equalTo:self.createJoinCodeField.text];
+    groupQuery.limit = 1;
     
-    
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     // fetch data asynchronously (check if group code exists already)
     [groupQuery findObjectsInBackgroundWithBlock:^(NSArray<Group *> * _Nullable groups, NSError * _Nullable error) {
         if (groups) {
@@ -91,6 +96,8 @@
             // handle error
             NSLog(@"error checking groups' codes");
         }
+        
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
 }
 
@@ -238,6 +245,8 @@
                     [Group createGroup:self.createGroupNameField.text withCode:self.createJoinCodeField.text withImage:[self resizeImage:editedImage withSize:CGSizeMake(100, 100)] withCompletion:^(BOOL succeeded, NSError * _Nullable error) {
                         if(succeeded){
                             NSLog(@"success");
+                            [self.delegate didAddGroup];
+                            
                             [self.navigationController popViewControllerAnimated:YES];
                         } else {
                             NSLog(@"fail");

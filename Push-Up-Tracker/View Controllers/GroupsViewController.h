@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AddGroupViewController.h"
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface GroupsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface GroupsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, AddGroupViewControllerDelegate>
 
 @end
 

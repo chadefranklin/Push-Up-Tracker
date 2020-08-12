@@ -10,7 +10,15 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+@protocol AddGroupViewControllerDelegate
+
+- (void)didAddGroup;
+
+@end
+
 @interface AddGroupViewController : UIViewController <UIImagePickerControllerDelegate, UINavigationControllerDelegate>
+
+@property (nonatomic, weak) id<AddGroupViewControllerDelegate> delegate;
 
 @end
 
