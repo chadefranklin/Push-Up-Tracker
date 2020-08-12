@@ -37,6 +37,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.profileImageView.layer.masksToBounds = YES;
+    self.profileImageView.layer.cornerRadius = self.profileImageView.bounds.size.width / 2;
+    
     self.playButton.enabled = NO;
     
     self.usernameLabel.text = self.set.creator.username;

@@ -25,6 +25,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.profileImageView.layer.masksToBounds = YES;
+    self.profileImageView.layer.cornerRadius = self.profileImageView.bounds.size.width / 2.16f;
+    
     self.usernameLabel.text = self.user.username;
     self.profileImageView.file = self.user[@"profileImage"];
     [self.profileImageView loadInBackground];

@@ -29,6 +29,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    self.profileImageView.layer.masksToBounds = YES;
+    self.profileImageView.layer.cornerRadius = self.profileImageView.bounds.size.width / 2.16;
+    
     self.usernameLabel.text = [PFUser currentUser].username;
     self.profileImageView.file = PFUser.currentUser[@"profileImage"];
     [self.profileImageView loadInBackground];
