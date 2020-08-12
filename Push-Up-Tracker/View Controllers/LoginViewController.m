@@ -9,6 +9,7 @@
 #import "LoginViewController.h"
 #import <Parse/Parse.h>
 #import "CEFPFFileObjectHelper.h"
+#import "MBProgressHUD.h"
 
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *usernameField;
@@ -29,11 +30,12 @@
 }
 
 - (IBAction)onSignUpPressed:(id)sender {
-    //[self registerUser];
+    [self.view endEditing:YES];
     [self profilePictureImageAlert];
 }
 
 - (IBAction)onLogInPressed:(id)sender {
+    [self.view endEditing:YES];
     [self loginUser];
 }
 
@@ -59,16 +61,27 @@
     newUser[@"maxPushups"] = @(0);
     newUser[@"profileImage"] = [CEFPFFileObjectHelper getPFFileFromImage:profileImage];
     
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     // call sign up function on the object
     [newUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError * error) {
         if (error) {
             NSLog(@"Error: %@", error.localizedDescription);
+        
+            NSLog(@"%d", error.code);
+            switch(error.code){
+                case 202:
+                    [self usernameTakenAlert];
+                    break;
+               default:
+                    break;
+            }
         } else {
             NSLog(@"User registered successfully");
             
             // manually segue to logged in view
             [self performSegueWithIdentifier:@"loginSegue" sender:nil];
         }
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
 }
 
@@ -76,15 +89,26 @@
     NSString *username = self.usernameField.text;
     NSString *password = self.passwordField.text;
     
+    [MBProgressHUD showHUDAddedTo:self.view animated:YES];
     [PFUser logInWithUsernameInBackground:username password:password block:^(PFUser * user, NSError *  error) {
         if (error != nil) {
             NSLog(@"User log in failed: %@", error.localizedDescription);
+            
+            NSLog(@"%d", error.code);
+            switch(error.code){
+                case 101:
+                    [self invalidUserPassAlert];
+                    break;
+               default:
+                    break;
+            }
         } else {
             NSLog(@"User logged in successfully");
             
             // display view controller that needs to shown after successful login
             [self performSegueWithIdentifier:@"loginSegue" sender:nil];
         }
+        [MBProgressHUD hideHUDForView:self.view animated:YES];
     }];
 }
 
@@ -177,7 +201,47 @@
     return newImage;
 }
 
+- (IBAction)onBackdropTapped:(id)sender {
+    [self.view endEditing:YES];
+}
 
+- (void)invalidUserPassAlert{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Invalid Username / Password"
+           message:@"Please double check your input."
+    preferredStyle:(UIAlertControllerStyleAlert)];
+    
+    // create an OK action
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * _Nonnull action) {
+                                                             // handle response here.
+                                                     }];
+    // add the OK action to the alert controller
+    [alert addAction:okAction];
+    
+    [self presentViewController:alert animated:YES completion:^{
+        // optional code for what happens after the alert controller has finished presenting
+    }];
+}
+
+- (void)usernameTakenAlert{
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Username Taken"
+           message:@"Please choose a different username."
+    preferredStyle:(UIAlertControllerStyleAlert)];
+    
+    // create an OK action
+    UIAlertAction *okAction = [UIAlertAction actionWithTitle:@"OK"
+                                                       style:UIAlertActionStyleDefault
+                                                     handler:^(UIAlertAction * _Nonnull action) {
+                                                             // handle response here.
+                                                     }];
+    // add the OK action to the alert controller
+    [alert addAction:okAction];
+    
+    [self presentViewController:alert animated:YES completion:^{
+        // optional code for what happens after the alert controller has finished presenting
+    }];
+}
 
 
 /*
