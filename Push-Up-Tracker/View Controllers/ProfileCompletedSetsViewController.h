@@ -11,7 +11,7 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
-@interface ProfileCompletedSetsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface ProfileCompletedSetsViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIScrollViewDelegate>
 
 @property (strong, nonatomic) PFUser *user;
 

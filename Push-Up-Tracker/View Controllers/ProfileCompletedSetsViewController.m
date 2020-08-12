@@ -15,8 +15,10 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *setsTableView;
 
-@property (nonatomic, strong) NSArray *sets;
+@property (nonatomic, strong) NSMutableArray *sets;
 @property (nonatomic, strong) UIRefreshControl *refreshControl;
+
+@property (assign, nonatomic) BOOL isMoreDataLoading;
 
 @end
 
@@ -44,14 +46,16 @@
 
 
 - (void)fetchSets{
+    self.isMoreDataLoading = true;
+    
     //TODO: Use Relation for Profile Sets instead of finding based on creator
     // construct PFQuery
     PFQuery *setQuery = [Set query];
     [setQuery orderByDescending:@"createdAt"];
-    //NSArray<NSString *> *keys = @[@"name", @"groupImage"];
     NSArray<NSString *> *keys = @[@"image", @"pushupAmount", @"createdAt", @"objectId", @"creator", @"likes", @"creator.username", @"creator.profileImage"];
     [setQuery selectKeys:keys];
     [setQuery whereKey:@"creator" equalTo:self.user];
+    setQuery.limit = 12;
 
     // fetch data asynchronously
     [setQuery findObjectsInBackgroundWithBlock:^(NSArray<Set *> * _Nullable sets, NSError * _Nullable error) {
@@ -65,6 +69,38 @@
         }
         
         [self.refreshControl endRefreshing];
+        self.isMoreDataLoading = false;
+    }];
+}
+
+- (void)fetchMoreSets{
+    self.isMoreDataLoading = true;
+    
+    NSLog(@"fetch more sets");
+    //TODO: Use Relation for Profile Sets instead of finding based on creator
+    // construct PFQuery
+    PFQuery *setQuery = [Set query];
+    [setQuery orderByDescending:@"createdAt"];
+    NSArray<NSString *> *keys = @[@"image", @"pushupAmount", @"createdAt", @"objectId", @"creator", @"likes", @"creator.username", @"creator.profileImage"];
+    [setQuery selectKeys:keys];
+    [setQuery whereKey:@"creator" equalTo:self.user];
+    Set *lastSet = self.sets.lastObject;
+    [setQuery whereKey:@"createdAt" lessThan:lastSet.createdAt];
+    setQuery.limit = 12;
+
+    // fetch data asynchronously
+    [setQuery findObjectsInBackgroundWithBlock:^(NSArray<Set *> * _Nullable sets, NSError * _Nullable error) {
+        if (sets) {
+            // do something with the data fetched
+            [self.sets addObjectsFromArray:sets];
+            [self.setsTableView reloadData];
+        }
+        else {
+            // handle error
+        }
+        
+        [self.refreshControl endRefreshing];
+        self.isMoreDataLoading = false;
     }];
 }
 
@@ -80,6 +116,21 @@
     [cell setSet:set];
         
     return cell;
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+     if(!self.isMoreDataLoading && self.sets && self.sets.count > 0){
+         // Calculate the position of one screen length before the bottom of the results
+         int scrollViewContentHeight = self.setsTableView.contentSize.height;
+         int scrollOffsetThreshold = scrollViewContentHeight - self.setsTableView.bounds.size.height;
+         
+         // When the user has scrolled past the threshold, start requesting
+         if(scrollView.contentOffset.y > scrollOffsetThreshold && self.setsTableView.isDragging) {
+             //self.isMoreDataLoading = true;
+             
+             [self fetchMoreSets];
+         }
+     }
 }
 
 
