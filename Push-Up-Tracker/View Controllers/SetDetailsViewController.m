@@ -89,7 +89,11 @@
                 marker.title = @"Set Location";
                 marker.map = self.mapView;
                 
-                [self.mapView animateToLocation:position];
+                //[self.mapView animateToLocation:position];
+                [self.mapView moveCamera:[GMSCameraUpdate setTarget:marker.position]];
+                [self.mapView animateToBearing:0];
+                [self.mapView animateToViewingAngle:0];
+                [self.mapView animateToZoom:4];
             }
         } else {
             // Failure!
